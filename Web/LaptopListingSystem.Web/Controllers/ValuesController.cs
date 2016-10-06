@@ -1,29 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
+
+using LaptopListingSystem.Data;
 
 namespace LaptopListingSystem.Web.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly LaptopListingSystemDbContext context;
+
+        public ValuesController(LaptopListingSystemDbContext context)
         {
-            return new string[] { "value1", "value2" };
+            this.context = context;
         }
 
-        // GET api/values/5
+        [HttpGet]
+        [Authorize]
+        public IEnumerable<string> Get()
+        {
+            var users = this.context.Users.ToList();
+            return new string[] { "value1", "value2" };
+        }
+        
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
-
-        // POST api/values
+        
         [HttpPost]
         public void Post([FromBody]string value)
         {

@@ -1,18 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Text;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace LaptopListingSystem.Web
 {
+    using LaptopListingSystem.Data;
+    using LaptopListingSystem.Data.Models;
+    using LaptopListingSystem.Web.Infrastructure.TokenProvider;
+
     public class Startup
     {
+        // TODO: Store SecretKey in more secure place
+        private const string SecretKey = "needtogetthisfromenvironment";
+        private readonly SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SecretKey));
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -27,26 +42,68 @@ namespace LaptopListingSystem.Web
             }
 
             builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
+            this.Configuration = builder.Build();
         }
 
         public IConfigurationRoot Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container
+        
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
+            services.AddOptions();
+
+            // Mvc
+            services.AddApplicationInsightsTelemetry(this.Configuration);
+
+            // Custom
+            services.AddDbContext<LaptopListingSystemDbContext>(options =>
+               options.UseSqlServer(
+                   this.Configuration.GetConnectionString("DefaultConnection"), 
+                   builder => builder.MigrationsAssembly("LaptopListingSystem.Web")));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<LaptopListingSystemDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            var tokenProviderAppSettingOptions = this.Configuration.GetSection(nameof(TokenProviderOptions));
+
+            loggerFactory.AddConsole(this.Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = tokenProviderAppSettingOptions[nameof(TokenProviderOptions.Issuer)],
+                ValidateAudience = true,
+                ValidAudience = tokenProviderAppSettingOptions[nameof(TokenProviderOptions.Audience)],
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = this.signingKey,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            app.UseStaticFiles();
+
+            app.UseSimpleTokenProvider(new TokenProviderOptions
+            {
+                Path = "/api/jwt",
+                Audience = tokenProviderAppSettingOptions[nameof(TokenProviderOptions.Audience)],
+                Issuer = tokenProviderAppSettingOptions[nameof(TokenProviderOptions.Issuer)],
+                SigningCredentials = new SigningCredentials(this.signingKey, SecurityAlgorithms.HmacSha256),
+                IdentityResolver = this.GetIdentity
+            });
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
+            });
+
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseApplicationInsightsExceptionTelemetry();
@@ -63,9 +120,26 @@ namespace LaptopListingSystem.Web
                 }
             });
 
-            app.UseStaticFiles();
-
             app.UseMvc();
+        }
+
+        private async Task<ClaimsIdentity> GetIdentity(HttpContext context)
+        {
+            var email = context.Request.Form["email"];
+
+            var userManager = context.RequestServices.GetRequiredService<UserManager<User>>();
+            var user = await userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var password = context.Request.Form["password"];
+                var isValidPassword = await userManager.CheckPasswordAsync(user, password);
+                if (isValidPassword)
+                {
+                    return new GenericIdentity(email, "Token");
+                }
+            }
+
+            return null;
         }
     }
 }

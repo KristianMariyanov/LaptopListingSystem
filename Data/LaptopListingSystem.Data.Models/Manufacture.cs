@@ -4,11 +4,13 @@ namespace LaptopListingSystem.Data.Models
 {
     using System.Collections.Generic;
 
-    public class Manufacture
+    using LaptopListingSystem.Data.Models.Common;
+
+    public class Manufacturer : AuditInfo
     {
         private ICollection<Laptop> laptops;
 
-        public Manufacture()
+        public Manufacturer()
         {
             this.laptops = new HashSet<Laptop>();
         }

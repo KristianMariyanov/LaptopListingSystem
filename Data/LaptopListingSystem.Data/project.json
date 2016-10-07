@@ -3,6 +3,7 @@
 
   "dependencies": {
     "LaptopListingSystem.Data.Models": "1.0.0-*",
+    "LaptopListingSystem.Common": "1.0.0-*",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
     "Microsoft.EntityFrameworkCore.SqlServer.Design": {

@@ -8,9 +8,10 @@ using LaptopListingSystem.Data;
 namespace LaptopListingSystem.Web.Migrations
 {
     [DbContext(typeof(LaptopListingSystemDbContext))]
-    partial class LaptopListingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161007100449_AddedValudation")]
+    partial class AddedValudation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

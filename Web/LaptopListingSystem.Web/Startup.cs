@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
@@ -16,11 +17,21 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
+using LaptopListingSystem.Data;
+using LaptopListingSystem.Data.Models;
+using LaptopListingSystem.Web.Infrastructure.Extensions;
+using LaptopListingSystem.Web.Infrastructure.TokenProvider;
+
 namespace LaptopListingSystem.Web
 {
-    using LaptopListingSystem.Data;
-    using LaptopListingSystem.Data.Models;
-    using LaptopListingSystem.Web.Infrastructure.TokenProvider;
+    using AutoMapper;
+
+    using LaptopListingSystem.Data.Repositories;
+    using LaptopListingSystem.Data.Repositories.Contracts;
+    using LaptopListingSystem.Services.Common.Contracts;
+    using LaptopListingSystem.Services.Common.Mapping;
+
+    using Suls.Common.Mapping;
 
     public class Startup
     {
@@ -53,8 +64,7 @@ namespace LaptopListingSystem.Web
 
             // Mvc
             services.AddApplicationInsightsTelemetry(this.Configuration);
-
-            // Custom
+            
             services.AddDbContext<LaptopListingSystemDbContext>(options =>
                options.UseSqlServer(
                    this.Configuration.GetConnectionString("DefaultConnection"), 
@@ -64,7 +74,16 @@ namespace LaptopListingSystem.Web
                 .AddEntityFrameworkStores<LaptopListingSystemDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddMemoryCache();
+
             services.AddMvc();
+
+            // Custom
+            services.AddTransient(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
+            services.AddTransient(typeof(IRepository<>), typeof(EfGenericRepository<>));
+            services.AddTransient<DbContext, LaptopListingSystemDbContext>();
+            services.AddScoped<IMappingService, AutoMapperMappingService>();
+            services.AddScoped<IMapper>(ctx => AutoMapperConfig.MapperConfiguration?.CreateMapper());
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -86,11 +105,9 @@ namespace LaptopListingSystem.Web
                 ClockSkew = TimeSpan.Zero
             };
 
-            app.UseStaticFiles();
-
             app.UseSimpleTokenProvider(new TokenProviderOptions
             {
-                Path = "/api/jwt",
+                Path = "/api/token",
                 Audience = tokenProviderAppSettingOptions[nameof(TokenProviderOptions.Audience)],
                 Issuer = tokenProviderAppSettingOptions[nameof(TokenProviderOptions.Issuer)],
                 SigningCredentials = new SigningCredentials(this.signingKey, SecurityAlgorithms.HmacSha256),
@@ -120,7 +137,12 @@ namespace LaptopListingSystem.Web
                 }
             });
 
+            app.UseStaticFiles();
+
             app.UseMvc();
+
+            app.RegisterAutoMapperMappings(
+                typeof(Startup).GetTypeInfo().Assembly);
         }
 
         private async Task<ClaimsIdentity> GetIdentity(HttpContext context)

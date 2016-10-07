@@ -1,0 +1,22 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Microsoft.EntityFrameworkCore": "1.0.1",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+    "Microsoft.NETCore.App": {
+      "version": "1.0.1",
+      "type": "platform"
+    },
+    "System.Linq.Queryable": "4.0.1"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
+    }
+  }
+}

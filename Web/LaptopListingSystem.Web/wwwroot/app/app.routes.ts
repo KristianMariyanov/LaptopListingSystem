@@ -1,11 +1,20 @@
 ﻿import { provideRouter, RouterConfig }  from '@angular/router';
-//import { AppComponent } from  "./app.component";
-import { HomeComponent } from  "./home/home.component";
+import { HomeComponent } from "./home/home.component";
+import { LaptopDetailsComponent } from "./laptops/laptop-details.component";
 
 const routes: RouterConfig = [
     { 
-        path: "home",
+        path: 'home',
         component: HomeComponent
+    },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: "full"
+    },
+    {
+        path: 'laptops/:id',
+        component: LaptopDetailsComponent
     }
 ];
 

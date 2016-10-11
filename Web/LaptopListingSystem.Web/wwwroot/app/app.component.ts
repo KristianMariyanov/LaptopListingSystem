@@ -1,10 +1,12 @@
 ﻿import { Component } from '@angular/core';
+import { CORE_DIRECTIVES, NgFor } from '@angular/common';
 import { ROUTER_DIRECTIVES } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 @Component({
     selector: 'my-app',
-    template: '<h1>My first Angular 2 App. I will have a new job!</h1>' +
-        '<router-outlet></router-outlet>',
-    directives: [ROUTER_DIRECTIVES]
+    templateUrl: 'app/layout.html',
+    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, NgFor],
+    precompile: [HomeComponent]
 })
 export class AppComponent { }

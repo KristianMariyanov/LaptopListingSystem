@@ -9,15 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var laptop_services_1 = require('../services/laptop.services');
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(laptopService) {
+        this.laptopService = laptopService;
+        this.mode = 'Observable';
     }
+    HomeComponent.prototype.ngOnInit = function () { this.getLaptops(); };
+    HomeComponent.prototype.getLaptops = function () {
+        var _this = this;
+        var laptopsTest = this.laptopService.getLaptops();
+        console.log(laptopsTest);
+        laptopsTest.subscribe(function (laptops) { return _this.laptops = laptops; }, function (error) { return _this.errorMessage = error; });
+    };
     HomeComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>Home</h1>'
+            templateUrl: 'app/home/home.html',
+            providers: [laptop_services_1.LaptopService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [laptop_services_1.LaptopService])
     ], HomeComponent);
     return HomeComponent;
 }());

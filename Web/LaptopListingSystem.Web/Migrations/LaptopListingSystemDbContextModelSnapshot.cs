@@ -44,7 +44,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("LaptopListingSystem.Data.Models.Laptop", b =>
@@ -86,7 +86,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasIndex("ManufacturerId");
 
-                    b.ToTable("Laptop");
+                    b.ToTable("Laptops");
                 });
 
             modelBuilder.Entity("LaptopListingSystem.Data.Models.Manufacturer", b =>
@@ -106,7 +106,7 @@ namespace LaptopListingSystem.Web.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Manufacturer");
+                    b.ToTable("Manufacturers");
                 });
 
             modelBuilder.Entity("LaptopListingSystem.Data.Models.User", b =>
@@ -192,7 +192,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Vote");
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>

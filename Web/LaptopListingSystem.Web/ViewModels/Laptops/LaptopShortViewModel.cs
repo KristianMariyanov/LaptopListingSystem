@@ -5,6 +5,8 @@
     using Suls.Common.Mapping;
     public class LaptopShortViewModel : IMapFrom<Laptop>
     {
+        public int Id { get; set; }
+
         public string Model { get; set; }
 
         public string ManufacturerName { get; set; }

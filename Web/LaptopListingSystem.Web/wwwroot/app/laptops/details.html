@@ -1,0 +1,16 @@
+﻿ <div *ngIf="laptopDetails">
+<h2>{{laptopDetails.model}}</h2>
+ <img src="{{laptopDetails.imageUrl}}" alt="{{laptopDetails.model}} image" />
+     <p>Price: ${{laptopDetails.price}}</p>
+     <p>Description: {{laptopDetails.description}}</p>
+     <p>Ram: {{laptopDetails.ram}}</p>
+     <p>Width: {{laptopDetails.width}}</p>
+     <p>AdditionalParts: {{laptopDetails.additionalParts}}</p>
+     <p>HardDisk: {{laptopDetails.hardDisk}}</p>
+     <p>Monitor: {{laptopDetails.monitor}}</p>
+     <ul>
+         <li *ngFor="let com of laptopDetails.comments">
+             {{com}}
+         </li>
+     </ul>
+</div>

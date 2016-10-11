@@ -1,0 +1,9 @@
+﻿<h3>Laptop System</h3>
+<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+<ul>
+    <li class="col-xs-4" *ngFor="let laptop of laptops">
+        <h2>{{laptop.model}}</h2>
+        <img src="{{laptop.imageUrl}}" alt="{{laptop.model}} image"/>
+        <a href="/laptops/{{laptop.id}}">${{laptop.price}}</a>
+    </li>
+</ul>

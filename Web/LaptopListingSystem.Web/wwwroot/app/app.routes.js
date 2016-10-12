@@ -7,11 +7,11 @@ var appRoutes = [
         path: 'home',
         component: home_component_1.HomeComponent
     },
-    ////{
-    ////    path: '',
-    ////    redirectTo: 'home',
-    ////    pathMatch: "full"
-    ////},
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: "full"
+    },
     {
         path: 'laptops/:id',
         component: laptop_details_component_1.LaptopDetailsComponent

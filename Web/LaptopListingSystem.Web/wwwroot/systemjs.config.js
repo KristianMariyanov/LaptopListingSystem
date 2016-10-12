@@ -12,23 +12,32 @@
         'app': { main: 'main.js', defaultExtension: 'js' },
         'rxjs': { defaultExtension: 'js' },
         'angular2-in-memory-web-api': { defaultExtension: 'js' },
+        '@angular/common': { main: 'bundles/common.umd.js', defaultExtension: 'js' },
+        '@angular/compiler': { main: 'bundles/compiler.umd.js', defaultExtension: 'js' },
+        '@angular/core': { main: 'bundles/core.umd.js', defaultExtension: 'js' },
+        '@angular/http': { main: 'bundles/http.umd.js', defaultExtension: 'js' },
+        '@angular/platform-browser': { main: 'bundles/platform-browser.umd.js', defaultExtension: 'js' },
+        '@angular/platform-browser-dynamic': { main: 'bundles/platform-browser-dynamic.umd.js', defaultExtension: 'js' },
+        '@angular/router': { main: 'bundles/router.umd.js', defaultExtension: 'js' },
+        //'@angular/router-deprecated': { main: 'bundles/.js', defaultExtension: 'js' },
+        '@angular/upgrade': { main: 'bundles/upgrader.umd.js', defaultExtension: 'js' }
     };
 
-    var packageNames = [
-      '@angular/common',
-      '@angular/compiler',
-      '@angular/core',
-      '@angular/http',
-      '@angular/platform-browser',
-      '@angular/platform-browser-dynamic',
-      '@angular/router',
-      '@angular/router-deprecated',
-      '@angular/upgrade'
-    ];
+    ////var packageNames = [
+    ////  '@angular/common',
+    ////  '@angular/compiler',
+    ////  '@angular/core',
+    ////  '@angular/http',
+    ////  '@angular/platform-browser',
+    ////  '@angular/platform-browser-dynamic',
+    ////  '@angular/router',
+    ////  '@angular/router-deprecated',
+    ////  '@angular/upgrade'
+    ////];
 
-    packageNames.forEach(function (pkgName) {
-        packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };
-    });
+    ////packageNames.forEach(function (pkgName) {
+    ////    packages[pkgName] = { main: 'bundles/.js', defaultExtension: 'js' };
+    ////});
 
     var config = {
         map: map,

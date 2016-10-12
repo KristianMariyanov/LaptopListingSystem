@@ -16,7 +16,8 @@
 
         public virtual Laptop Laptop { get; set; }
 
-        [Required]
+        // TODO: Uncomment
+        //[Required] 
         public string UserId { get; set; }
 
         public virtual User User { get; set; }

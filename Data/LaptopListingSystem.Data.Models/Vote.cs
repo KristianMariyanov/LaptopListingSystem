@@ -12,7 +12,8 @@
 
         public Laptop Laptop { get; set; }
 
-        [Required]
+        // TODO: Uncomment
+        //[Required]
         public string UserId { get; set; }
 
         public User User { get; set; }

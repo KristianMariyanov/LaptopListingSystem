@@ -8,11 +8,11 @@ const appRoutes: Routes = [
         path: 'home',
         component: HomeComponent
     },
-    ////{
-    ////    path: '',
-    ////    redirectTo: 'home',
-    ////    pathMatch: "full"
-    ////},
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: "full"
+    },
     {
         path: 'laptops/:id',
         component: LaptopDetailsComponent

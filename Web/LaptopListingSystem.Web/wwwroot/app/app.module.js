@@ -30,7 +30,7 @@ var AppModule = (function () {
                 home_component_1.HomeComponent,
                 laptop_details_component_1.LaptopDetailsComponent
             ],
-            bootstrap: [app_component_1.AppComponent, home_component_1.HomeComponent, laptop_details_component_1.LaptopDetailsComponent]
+            bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);

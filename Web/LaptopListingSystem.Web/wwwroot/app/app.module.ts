@@ -10,6 +10,8 @@ import { routing } from './app.routes';
 import { HomeComponent } from './home/home.component';
 import { LaptopDetailsComponent } from './laptops/laptop-details.component';
 
+import { LaptopService } from './services/laptop.services';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -21,7 +23,7 @@ import { LaptopDetailsComponent } from './laptops/laptop-details.component';
         HomeComponent,
         LaptopDetailsComponent
     ],
-    bootstrap: [AppComponent, HomeComponent, LaptopDetailsComponent]
+    bootstrap: [AppComponent]
 })
 
 export class AppModule { }

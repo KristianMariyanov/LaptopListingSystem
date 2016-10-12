@@ -1,5 +1,4 @@
 ﻿import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { Laptop } from '../laptop';
 import { LaptopService } from '../services/laptop.services';

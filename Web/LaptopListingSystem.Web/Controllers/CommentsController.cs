@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class CommentsController : Controller
     {
@@ -18,7 +18,6 @@
             this.comments = comments;
         }
 
-        [HttpPost]
         public IActionResult Post(CommentInputModel inputModel)
         {
             if (inputModel != null && this.ModelState.IsValid)

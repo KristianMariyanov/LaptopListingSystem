@@ -3,26 +3,33 @@ import { Http, Response } from '@angular/http';
 
 import { Laptop } from "../laptop";
 import { LaptopDetails } from "../laptop-details";
+import { Comment } from "../comment";
 import { Observable } from 'rxjs/Observable';
 import './rxjs-operators';
 
 @Injectable()
 export class LaptopService {
-    private laptopsUrl = 'api/laptops/';
-    private laptopDetailsUrl = 'api/laptops/';
+    private laptopsBaseUrl = 'api/laptops/';
+    private addCommentBaseUrl = 'api/comments/';
 
     constructor(private http: Http) {}
 
     getLaptops(): Observable<Laptop[]> {
-        return this.http.get(this.laptopsUrl)
+        return this.http.get(this.laptopsBaseUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getLaptop(id: number): Observable<LaptopDetails> {
-        return this.http.get(this.laptopsUrl + id)
+        return this.http.get(this.laptopsBaseUrl + id)
             .map(this.extractData)
             .catch(this.handleError);
+    }
+
+    save(comment: Comment): Observable<Response> {
+        return this
+            .http
+            .post(`${this.addCommentBaseUrl}`, JSON.stringify(comment));
     }
 
     private extractData(res: Response) {

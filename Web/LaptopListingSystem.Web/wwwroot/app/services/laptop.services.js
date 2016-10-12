@@ -15,18 +15,23 @@ require('./rxjs-operators');
 var LaptopService = (function () {
     function LaptopService(http) {
         this.http = http;
-        this.laptopsUrl = 'api/laptops/';
-        this.laptopDetailsUrl = 'api/laptops/';
+        this.laptopsBaseUrl = 'api/laptops/';
+        this.addCommentBaseUrl = 'api/comments/';
     }
     LaptopService.prototype.getLaptops = function () {
-        return this.http.get(this.laptopsUrl)
+        return this.http.get(this.laptopsBaseUrl)
             .map(this.extractData)
             .catch(this.handleError);
     };
     LaptopService.prototype.getLaptop = function (id) {
-        return this.http.get(this.laptopsUrl + id)
+        return this.http.get(this.laptopsBaseUrl + id)
             .map(this.extractData)
             .catch(this.handleError);
+    };
+    LaptopService.prototype.save = function (comment) {
+        return this
+            .http
+            .post("" + this.addCommentBaseUrl, JSON.stringify(comment));
     };
     LaptopService.prototype.extractData = function (res) {
         var body = res.json();

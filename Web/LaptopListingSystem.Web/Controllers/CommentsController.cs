@@ -1,5 +1,8 @@
 ﻿namespace LaptopListingSystem.Web.Controllers
 {
+    using System.Linq;
+    using System.Security.Claims;
+
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories.Contracts;
     using LaptopListingSystem.Web.InputModels.Comments;
@@ -12,10 +15,14 @@
     public class CommentsController : Controller
     {
         private readonly IDeletableEntityRepository<Comment> comments;
+        private readonly IDeletableEntityRepository<User> users;
 
-        public CommentsController(IDeletableEntityRepository<Comment> comments)
+        public CommentsController(
+            IDeletableEntityRepository<Comment> comments,
+            IDeletableEntityRepository<User> users)
         {
             this.comments = comments;
+            this.users = users;
         }
 
         [HttpPost]
@@ -23,10 +30,11 @@
         {
             if (inputModel != null && this.ModelState.IsValid)
             {
-                // TODO: get user
-                var comment = new Comment { Content = inputModel.Content, LaptopId = inputModel.LaptopId };
+                var userName = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = this.users.All().Where(u => u.UserName == userName).Select(u => u.Id).FirstOrDefault();
+                var comment = new Comment { Content = inputModel.Content, LaptopId = inputModel.LaptopId, UserId = userId };
                 this.comments.Add(comment);
-
+                this.comments.SaveChanges();
                 // We don't have view of single comments
                 return this.Created(string.Empty, comment);
             }

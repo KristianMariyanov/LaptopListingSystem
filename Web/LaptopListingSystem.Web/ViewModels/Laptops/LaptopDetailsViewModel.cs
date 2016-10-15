@@ -24,6 +24,8 @@
         
         public string Description { get; set; }
 
+        public int VotesCount { get; set; }
+
         public IEnumerable<string> Comments { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)

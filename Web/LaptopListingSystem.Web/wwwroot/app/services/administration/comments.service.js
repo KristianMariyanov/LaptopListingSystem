@@ -15,27 +15,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-require('rxjs/add/operator/map');
+require('../rxjs-operators');
 var base_administration_service_1 = require('./base-administration.service');
 var CommentsService = (function (_super) {
     __extends(CommentsService, _super);
     function CommentsService(http) {
-        _super.call(this);
+        _super.call(this, http);
         this.http = http;
+        this.baseCommentsUrl = 'api/administration/comments';
     }
+    CommentsService.prototype.getComments = function () {
+        return this.getAll(this.baseCommentsUrl);
+    };
     CommentsService.prototype.addComment = function (content, laptopId, userEmail) {
-        var headers = this.getAuthorizationHeader();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        var options = new http_1.RequestOptions({ headers: headers });
-        ////return this.http.post(this.addCommentUrl, `content=${content}&laptopId=${laptopId}`, options)
-        ////    .map(this.extractData)
-        ////    .catch(this.handleError);
+        return this.add(this.baseCommentsUrl, "content=" + content + "&laptopId=" + laptopId + "&userEmail=" + userEmail);
     };
     CommentsService.prototype.deleteComment = function (commentId) {
+        return this.delete(this.baseCommentsUrl + "/" + commentId);
     };
     CommentsService.prototype.getComment = function (commentId) {
+        return this.get(this.baseCommentsUrl + "/" + commentId);
     };
-    CommentsService.prototype.updateComment = function (content, laptopId, userEmail) {
+    CommentsService.prototype.updateComment = function (content, laptopId, userEmail, commentId) {
+        return this.update(this.baseCommentsUrl, "content=" + content + "&laptopId=" + laptopId + "&userEmail=" + userEmail + "&commentId=" + commentId);
     };
     CommentsService = __decorate([
         core_1.Injectable(), 

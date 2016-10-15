@@ -1,0 +1,22 @@
+﻿<h2>Comments</h2>
+<a routerLink="/administration/comments/add">Add Comment</a>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Content</th>
+        <th>Author</th>
+        <th>Created On</th>
+        <th>Laptop Model</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let comment of comments">
+        <th>{{comment.id}}</th>
+        <th>{{comment.content}}</th>
+        <th>{{comment.author}}</th>
+        <th>{{comment.createdOn}}</th>
+        <th>{{comment.laptopModel}}</th>
+        <th><a [routerLink]="[ '/administration/comments/edit', comment.id ]">Edit</a></th>
+        <th (click)="deleteComment(comment.id)">Delete</th>
+    </tr>
+</table>

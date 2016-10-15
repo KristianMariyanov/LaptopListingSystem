@@ -1,32 +1,38 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
+import '../rxjs-operators'
 
-import {BaseAdministrationService} from './base-administration.service';
+import { BaseAdministrationService } from './base-administration.service';
+import { Comment } from "../../comment";
 
 @Injectable()
 export class CommentsService extends BaseAdministrationService {
-    constructor(private http: Http) { super(); }
+    private baseCommentsUrl = 'api/administration/comments';
+
+    constructor(public http: Http) { super(http); }
+
+    getComments(): Observable<any> {
+        return this.getAll(this.baseCommentsUrl);
+    }
 
     addComment(content: string, laptopId: number, userEmail: string): Observable<any> {
-        let headers = this.getAuthorizationHeader();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        let options = new RequestOptions({ headers: headers });
-        ////return this.http.post(this.addCommentUrl, `content=${content}&laptopId=${laptopId}`, options)
-        ////    .map(this.extractData)
-        ////    .catch(this.handleError);
+        return this.add(
+            this.baseCommentsUrl,
+            `content=${content}&laptopId=${laptopId}&userEmail=${userEmail}`);
     }
 
     deleteComment(commentId: number): Observable<any> {
-
+        return this.delete(`${this.baseCommentsUrl}/${commentId}`);
     }
 
-    getComment(commentId: number): Observable<any> {
-
+    getComment(commentId: number): Observable<Comment> {
+        return this.get(`${this.baseCommentsUrl}/${commentId}`);
     }
 
-    updateComment(content: string, laptopId: number, userEmail: string): Observable<any> {
-
+    updateComment(content: string, laptopId: number, userEmail: string, commentId: number): Observable<any> {
+        return this.update(
+            this.baseCommentsUrl,
+            `content=${content}&laptopId=${laptopId}&userEmail=${userEmail}&commentId=${commentId}`);
     }
 }

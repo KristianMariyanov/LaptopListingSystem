@@ -11,13 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require('@angular/http');
-var angular2_jwt_1 = require('angular2-jwt');
 var forms_1 = require('@angular/forms');
 var app_routes_1 = require('./app.routes');
 var app_component_1 = require('./app.component');
 var home_component_1 = require('./home/home.component');
 var laptop_details_component_1 = require('./laptops/laptop-details.component');
 var login_component_1 = require('./login/login.component');
+var comments_administration_component_1 = require('./administration/comments-administration.component');
+var edit_comment_administration_component_1 = require('./administration/edit-comment-administration.component');
+var add_comment_administration_component_1 = require("./administration/add-comment-administration.component");
+var manufacturers_administration_component_1 = require("./administration/manufacturers-administration.component");
+var edit_manufacturer_administration_component_1 = require("./administration/edit-manufacturer-administration.component");
+var add_manufacturer_administration_component_1 = require("./administration/add-manufacturer-administration.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,15 +38,14 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
                 laptop_details_component_1.LaptopDetailsComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                comments_administration_component_1.CommentsAdministrationComponent,
+                edit_comment_administration_component_1.EditCommentAdministrationComponent,
+                add_comment_administration_component_1.AddCommentAdministrationComponent,
+                manufacturers_administration_component_1.ManufacturersAdministrationComponent,
+                edit_manufacturer_administration_component_1.EditManufacturerAdministrationComponent,
+                add_manufacturer_administration_component_1.AddManufacturerAdministrationComponent
             ],
-            providers: [
-                angular2_jwt_1.AUTH_PROVIDERS,
-                {
-                    provide: angular2_jwt_1.AuthConfig,
-                    useClass: angular2_jwt_1.AuthConfig,
-                    deps: [http_1.Http]
-                },],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

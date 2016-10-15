@@ -1,7 +1,6 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
-import { AUTH_PROVIDERS, AuthHttp, AuthConfig } from 'angular2-jwt';
 import { FormsModule } from '@angular/forms';
 
 import { routing } from './app.routes';
@@ -10,6 +9,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LaptopDetailsComponent } from './laptops/laptop-details.component';
 import { LoginComponent } from './login/login.component';
+import { CommentsAdministrationComponent } from './administration/comments-administration.component';
+import { EditCommentAdministrationComponent } from './administration/edit-comment-administration.component';
+import { AddCommentAdministrationComponent } from "./administration/add-comment-administration.component";
+import { ManufacturersAdministrationComponent } from "./administration/manufacturers-administration.component";
+import { EditManufacturerAdministrationComponent } from "./administration/edit-manufacturer-administration.component";
+import { AddManufacturerAdministrationComponent } from "./administration/add-manufacturer-administration.component";
 
 import { LaptopService } from './services/laptop.service';
 
@@ -24,15 +29,14 @@ import { LaptopService } from './services/laptop.service';
         AppComponent,
         HomeComponent,
         LaptopDetailsComponent,
-        LoginComponent
+        LoginComponent,
+        CommentsAdministrationComponent,
+        EditCommentAdministrationComponent,
+        AddCommentAdministrationComponent,
+        ManufacturersAdministrationComponent,
+        EditManufacturerAdministrationComponent,
+        AddManufacturerAdministrationComponent
     ],
-    providers: [
-        AUTH_PROVIDERS,
-        {
-            provide: AuthConfig,
-            useClass: AuthConfig,
-            deps: [Http]
-        },],
     bootstrap: [AppComponent]
 })
 

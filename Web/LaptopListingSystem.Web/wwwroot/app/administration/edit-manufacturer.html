@@ -1,0 +1,13 @@
+﻿Edit manufacturer:
+
+<form name="form" (ngSubmit)="manufacturerForm.form.valid && updateManufacturer()" #manufacturerForm="ngForm">
+    <div class="form-name" [ngClass]="{ 'has-error': manufacturerForm.submitted && !name.valid }">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="manufacturer.name" #name="ngModel" required />
+        <div *ngIf="manufacturerForm.submitted && !name.valid" class="help-block">Name is required</div>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Edit manufacturer">
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{errorMessage}}</div>
+</form>

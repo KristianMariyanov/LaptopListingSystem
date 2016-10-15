@@ -45,19 +45,6 @@
         packages: packages
     }
 
-    System.config({
-        defaultJSExtensions: true,
-        packages: {
-            "angular2-jwt": { "defaultExtension": "js" },
-            "js-base64": { "defaultExtension": "js" }
-        },
-        map: {
-            "angular2-jwt": "libs/angular2-jwt.js",
-            "js-base64": "libs/base64",
-            "buffer": "@empty"
-        }
-    });
-
     // filterSystemConfig - index.html's chance to modify config before we register it.
     if (global.filterSystemConfig) { global.filterSystemConfig(config); }
 

@@ -4,7 +4,12 @@
     </h1>
     <nav class="header-nav">
         <ul class="nav-list horizontal-list">
-            <li class="nav-item"><a href="/home">Начало</a></li>
+            <li class="nav-item"><a routerLink="/home">Начало</a></li>
+            <li class="nav-item" *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+            <li class="nav-item" *ngIf="isLoggedIn" (click)="logout(this)">Logout</li>
+            <li class="nav-item" *ngIf="authService.isAdmin()"><a routerLink="/administration/laptops">Laptops Administration</a></li>
+            <li class="nav-item" *ngIf="authService.isAdmin()"><a routerLink="/administration/manufacturers">Manufacturers Administration</a></li>
+            <li class="nav-item" *ngIf="authService.isAdmin()"><a routerLink="/administration/comments">Comments Administration</a></li>
         </ul>
     </nav>
 </header>

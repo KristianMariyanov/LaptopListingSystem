@@ -1,9 +1,16 @@
-﻿<h3>Laptop System</h3>
-<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+﻿<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+<input type="text" #searchTerm /><br />
+Order by: <br/>
+<input type="radio" name="order" (click)="order='ram'">Ram
+<input type="radio" name="order" (click)="order='votes'">Votes
+<input type="radio" name="order" (click)="order='comment'">Comment
+<button (click)="filterLaptops(searchTerm.value)">Get Reults</button>
+
 <ul>
     <li class="col-xs-4" *ngFor="let laptop of laptops">
-        <h2>{{laptop.model}}</h2>
-        <img src="{{laptop.imageUrl}}" alt="{{laptop.model}} image"/>
-        <a href="/laptops/{{laptop.id}}">${{laptop.price}}</a>
+        <h2>Model:{{laptop.model}}</h2>
+        <h2>Manufacturer: {{laptop.manufacturerName}}</h2>
+        <img src="{{laptop.imageUrl}}" alt="{{laptop.model}} image" />
+        <a [routerLink]="[ '/laptops/', laptop.id ]">${{laptop.price}}</a>
     </li>
 </ul>

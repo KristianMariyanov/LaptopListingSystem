@@ -15,11 +15,12 @@
         '@angular/common': { main: 'bundles/common.umd.js', defaultExtension: 'js' },
         '@angular/compiler': { main: 'bundles/compiler.umd.js', defaultExtension: 'js' },
         '@angular/core': { main: 'bundles/core.umd.js', defaultExtension: 'js' },
+        'core': { main: 'bundles/core.umd.js', defaultExtension: 'js' },
         '@angular/http': { main: 'bundles/http.umd.js', defaultExtension: 'js' },
         '@angular/platform-browser': { main: 'bundles/platform-browser.umd.js', defaultExtension: 'js' },
         '@angular/platform-browser-dynamic': { main: 'bundles/platform-browser-dynamic.umd.js', defaultExtension: 'js' },
         '@angular/router': { main: 'bundles/router.umd.js', defaultExtension: 'js' },
-        //'@angular/router-deprecated': { main: 'bundles/.js', defaultExtension: 'js' },
+        '@angular/forms': { main: 'bundles/forms.umd.js', defaultExtension: 'js' },
         '@angular/upgrade': { main: 'bundles/upgrader.umd.js', defaultExtension: 'js' }
     };
 
@@ -43,6 +44,19 @@
         map: map,
         packages: packages
     }
+
+    System.config({
+        defaultJSExtensions: true,
+        packages: {
+            "angular2-jwt": { "defaultExtension": "js" },
+            "js-base64": { "defaultExtension": "js" }
+        },
+        map: {
+            "angular2-jwt": "libs/angular2-jwt.js",
+            "js-base64": "libs/base64",
+            "buffer": "@empty"
+        }
+    });
 
     // filterSystemConfig - index.html's chance to modify config before we register it.
     if (global.filterSystemConfig) { global.filterSystemConfig(config); }

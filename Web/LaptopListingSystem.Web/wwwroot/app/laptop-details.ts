@@ -8,4 +8,5 @@ export class LaptopDetails extends Laptop {
     additionalParts: string;
     hardDisk: number;
     monitor: number;
+    votesCount: number;
 }

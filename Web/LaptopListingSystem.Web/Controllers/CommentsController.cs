@@ -25,7 +25,6 @@
             this.users = users;
         }
 
-        [HttpPost]
         public IActionResult Post(CommentInputModel inputModel)
         {
             if (inputModel != null && this.ModelState.IsValid)

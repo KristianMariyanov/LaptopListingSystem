@@ -36,8 +36,7 @@
             this.mappingService = mappingService;
             this.memoryCache = memoryCache;
         }
-
-        [HttpGet]
+        
         public IActionResult Get()
         {
             const string CacheKey = "TopLatops";

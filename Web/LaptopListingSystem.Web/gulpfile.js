@@ -7,6 +7,9 @@ gulp.task('default', function () {
 gulp.task('restore', function () {
     gulp.src([
         'node_modules/@angular/**/*.js',
+        'node_modules/angular2-jwt/*.js',
+        'node_modules/js-base64/*.js',
+        'node_modules/js-base64/*.js',
         'node_modules/angular2-in-memory-web-api/*.js',
         'node_modules/rxjs/**/*.js',
         'node_modules/systemjs/dist/*.js',

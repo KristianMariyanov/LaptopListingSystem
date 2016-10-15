@@ -86,6 +86,37 @@
 
         [HttpGet("[Action]")]
         [Authorize]
+        public IActionResult Filter(string term, string order)
+        {
+            var laptopsQuery = this.laptops.All();
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                laptopsQuery = laptopsQuery.Where(l => l.Model.Contains(term) || l.Manufacturer.Name.Contains(term));
+            }
+
+            if (order == "ram")
+            {
+                laptopsQuery = laptopsQuery.OrderByDescending(l => l.Ram);
+            }
+            else if (order == "votes")
+            {
+                laptopsQuery = laptopsQuery.OrderByDescending(l => l.Votes.Count);
+            }
+            else if (order == "comments")
+            {
+                laptopsQuery = laptopsQuery.OrderByDescending(l => l.Comments.Count);
+            }
+
+            var result = this.mappingService
+                .MapCollection<LaptopShortViewModel>(laptopsQuery)
+                .ToList();
+
+            return this.Json(result);
+        }
+
+        [HttpGet("[Action]")]
+        [Authorize]
         public IActionResult All(int? page)
         {
             if (!page.HasValue)

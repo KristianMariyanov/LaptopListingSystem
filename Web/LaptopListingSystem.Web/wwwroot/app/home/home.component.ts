@@ -1,7 +1,7 @@
 ﻿import { Component } from '@angular/core';
 
 import { Laptop } from '../laptop';
-import { LaptopService } from '../services/laptop.services';
+import { LaptopService } from '../services/laptop.service';
 
 @Component({
     selector: 'my-app',
@@ -12,16 +12,24 @@ import { LaptopService } from '../services/laptop.services';
 export class HomeComponent {
     errorMessage: string;
     laptops: Laptop[];
-    mode = 'Observable';
+    order: any;
 
-    ngOnInit() { this.getLaptops(); }
+    ngOnInit() {
+        this.getLaptops();
+    }
 
     constructor(private laptopService: LaptopService) { }
 
     getLaptops() {
-        let laptopsTest = this.laptopService.getLaptops();
-        console.log(laptopsTest);
-        laptopsTest.subscribe(
+        this.laptopService.getLaptops()
+            .subscribe(
+                laptops => this.laptops = laptops,
+                error => this.errorMessage = <any>error);
+    }
+
+    filterLaptops(searchTerm: string) {
+        this.laptopService.filterLaptops(searchTerm, this.order)
+            .subscribe(
                 laptops => this.laptops = laptops,
                 error => this.errorMessage = <any>error);
     }

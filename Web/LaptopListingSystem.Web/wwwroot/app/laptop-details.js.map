@@ -1,1 +1,1 @@
-{"version":3,"file":"laptop-details.js","sourceRoot":"","sources":["laptop-details.ts"],"names":[],"mappings":";;;;;;AAAA,uBAAuB,UAAU,CAAC,CAAA;AAElC;IAAmC,iCAAM;IAAzC;QAAmC,8BAAM;IAQzC,CAAC;IAAD,oBAAC;AAAD,CAAC,AARD,CAAmC,eAAM,GAQxC;AARY,qBAAa,gBAQzB,CAAA"}
+{"version":3,"file":"laptop-details.js","sourceRoot":"","sources":["laptop-details.ts"],"names":[],"mappings":";;;;;;AAAA,uBAAuB,UAAU,CAAC,CAAA;AAElC;IAAmC,iCAAM;IAAzC;QAAmC,8BAAM;IASzC,CAAC;IAAD,oBAAC;AAAD,CAAC,AATD,CAAmC,eAAM,GASxC;AATY,qBAAa,gBASzB,CAAA"}

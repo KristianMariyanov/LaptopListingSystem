@@ -9,6 +9,14 @@ using Newtonsoft.Json;
 
 namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using LaptopListingSystem.Data.Models;
+    using LaptopListingSystem.Data.Repositories.Contracts;
+
+    using Microsoft.AspNetCore.Identity;
+
     /// <summary>
     /// Token generator middleware component which is added to an HTTP pipeline.
     /// This class is not created by application code directly,
@@ -18,6 +26,8 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
     public class TokenProviderMiddleware
     {
         private readonly RequestDelegate next;
+        private readonly IDeletableEntityRepository<User> users;
+        private readonly UserManager<User> userManager;
         private readonly TokenProviderOptions options;
         private readonly ILogger logger;
         private readonly JsonSerializerSettings serializerSettings;
@@ -25,9 +35,13 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
         public TokenProviderMiddleware(
             RequestDelegate next,
             IOptions<TokenProviderOptions> options,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            IDeletableEntityRepository<User> users,
+            UserManager<User> userManager)
         {
             this.next = next;
+            this.users = users;
+            this.userManager = userManager;
             this.logger = loggerFactory.CreateLogger<TokenProviderMiddleware>();
             this.options = options.Value;
 
@@ -76,12 +90,20 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
 
             // Specifically add the jti (nonce), iat (issued timestamp), and sub (subject/user) claims.
             // You can add other claims here, if you want:
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, await this.options.NonceGenerator()),
                 new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64)
             };
+
+            var user = this.users.All().FirstOrDefault(u => u.Email == email);
+            var isAdmin = await this.userManager.IsInRoleAsync(user, "Administrator");
+
+            if (isAdmin)
+            {
+                claims.Add(new Claim("Administrator", "true"));
+            }
 
             // Create the JWT and write it to a string
             var jwt = new JwtSecurityToken(
@@ -96,7 +118,8 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
             var response = new
             {
                 access_token = encodedJwt,
-                expires_in = (int)this.options.Expiration.TotalSeconds
+                expires_in = (int)this.options.Expiration.TotalSeconds,
+                is_admin = isAdmin
             };
 
             // Serialize and return the response

@@ -31,7 +31,7 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
         /// The expiration time for the generated tokens.
         /// </summary>
         /// <remarks>The default is five minutes (300 seconds).</remarks>
-        public TimeSpan Expiration { get; set; } = TimeSpan.FromMinutes(5);
+        public TimeSpan Expiration { get; set; } = TimeSpan.FromMinutes(300);
 
         /// <summary>
         /// The signing key to use when generating tokens.

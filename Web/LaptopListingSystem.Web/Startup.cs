@@ -30,8 +30,7 @@ namespace LaptopListingSystem.Web
     using LaptopListingSystem.Data.Repositories.Contracts;
     using LaptopListingSystem.Services.Common.Contracts;
     using LaptopListingSystem.Services.Common.Mapping;
-
-    using Suls.Common.Mapping;
+    using LaptopListingSystem.Web.Infrastructure.Mapping;
 
     public class Startup
     {

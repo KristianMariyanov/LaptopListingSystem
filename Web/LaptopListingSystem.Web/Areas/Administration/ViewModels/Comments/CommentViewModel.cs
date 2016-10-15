@@ -1,15 +1,25 @@
-﻿namespace LaptopListingSystem.Web.ViewModels.Comments
+﻿namespace LaptopListingSystem.Web.Areas.Administration.ViewModels.Comments
 {
+    using System;
+
     using AutoMapper;
 
     using LaptopListingSystem.Data.Models;
+    using LaptopListingSystem.Web.Infrastructure.Mapping;
 
-    using Suls.Common.Mapping;
     public class CommentViewModel : IMapFrom<Comment>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Content { get; set; }
 
         public string Author { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public int LaptopId { get; set; }
+
+        public string LaptopModel { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {

@@ -1,4 +1,4 @@
-﻿namespace Suls.Common.Mapping
+﻿namespace LaptopListingSystem.Web.Infrastructure.Mapping
 {
     using System;
     using System.Collections.Generic;

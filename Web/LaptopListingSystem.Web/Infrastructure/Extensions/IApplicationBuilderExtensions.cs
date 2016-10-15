@@ -2,10 +2,10 @@
 {
     using System.Reflection;
 
+    using LaptopListingSystem.Web.Infrastructure.Mapping;
+
     using Microsoft.AspNetCore.Builder;
-
-    using Suls.Common.Mapping;
-
+    
     public static class IApplicationBuilderExtensions
     {
         public static void RegisterAutoMapperMappings(this IApplicationBuilder app, params Assembly[] assemblies)

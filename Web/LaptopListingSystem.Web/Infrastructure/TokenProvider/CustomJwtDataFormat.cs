@@ -1,12 +1,13 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http.Authentication;
-using Microsoft.IdentityModel.Tokens;
-
-namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
+﻿namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
 {
+    using System;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Security.Claims;
+
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Http.Authentication;
+    using Microsoft.IdentityModel.Tokens;
+
     public class CustomJwtDataFormat : ISecureDataFormat<AuthenticationTicket>
     {
         private readonly string algorithm;

@@ -62,6 +62,10 @@
   },
 
   "runtimeOptions": {
+    "additionalArguments": [
+      "/ruleset:../../visual-studio-analyzers.ruleset"
+    ],
+
     "configProperties": {
       "System.GC.Server": true
     }

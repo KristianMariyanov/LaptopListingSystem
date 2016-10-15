@@ -1,0 +1,34 @@
+﻿<h2>Laptops</h2>
+<a routerLink="/administration/laptops/add">Add laptop</a>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Model</th>
+        <th>Manufacturer name</th>
+        <th>Image url</th>
+        <th>Price</th>
+        <th>Ram</th>
+        <th>Weight</th>
+        <th>Description</th>
+        <th>Additional parts</th>
+        <th>HardDisk</th>
+        <th>Monitor</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let laptop of laptops">
+        <th>{{laptop.id}}</th>
+        <th>{{laptop.model}}</th>
+        <th>{{laptop.manufacturerName}}</th>
+        <th>{{laptop.imageUrl}}</th>
+        <th>{{laptop.price}}</th>
+        <th>{{laptop.ram}}</th>
+        <th>{{laptop.weight}}</th>
+        <th>{{laptop.description}}</th>
+        <th>{{laptop.additionalParts}}</th>
+        <th>{{laptop.hardDisk}}</th>
+        <th>{{laptop.monitor}}</th>
+        <th><a [routerLink]="[ '/administration/laptops/edit', laptop.id ]">Edit</a></th>
+        <th (click)="deleteLaptop(laptop.id)">Delete</th>
+    </tr>
+</table>

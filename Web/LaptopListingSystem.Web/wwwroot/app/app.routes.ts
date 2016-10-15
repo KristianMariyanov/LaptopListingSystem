@@ -9,6 +9,9 @@ import { AddCommentAdministrationComponent } from "./administration/add-comment-
 import { ManufacturersAdministrationComponent } from "./administration/manufacturers-administration.component";
 import { EditManufacturerAdministrationComponent } from "./administration/edit-manufacturer-administration.component";
 import { AddManufacturerAdministrationComponent } from "./administration/add-manufacturer-administration.component";
+import { LaptopsAdministrationComponent } from "./administration/laptops-administration.component";
+import { EditLaptopAdministrationComponent } from "./administration/edit-laptop-administration.component";
+import { AddLaptopAdministrationComponent } from "./administration/add-laptop-administration.component";
 
 const appRoutes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -21,6 +24,9 @@ const appRoutes: Routes = [
     { path: 'administration/manufacturers', component: ManufacturersAdministrationComponent },
     { path: 'administration/manufacturers/edit/:id', component: EditManufacturerAdministrationComponent },
     { path: 'administration/manufacturers/add', component: AddManufacturerAdministrationComponent },
+    { path: 'administration/laptops', component: LaptopsAdministrationComponent },
+    { path: 'administration/laptops/edit/:id', component: EditLaptopAdministrationComponent },
+    { path: 'administration/laptops/add', component: AddLaptopAdministrationComponent },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

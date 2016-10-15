@@ -1,9 +1,13 @@
 ﻿namespace LaptopListingSystem.Data
 {
+    using System;
+
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
     using LaptopListingSystem.Data.Models;
+    using LaptopListingSystem.Data.Models.Common.Contracts;
+    using System.Linq;
 
     public class LaptopListingSystemDbContext : IdentityDbContext<User>
     {
@@ -25,6 +29,37 @@
             base.OnModelCreating(builder);
 
             builder.Entity<Manufacturer>().HasIndex(m => m.Name).IsUnique();
+        }
+
+        public override int SaveChanges()
+        {
+            this.ApplyAuditInfoRules();
+
+            return base.SaveChanges();
+        }
+
+        private void ApplyAuditInfoRules()
+        {
+            // Approach via @julielerman: http://bit.ly/123661P
+            var auditInfoEntries = this.ChangeTracker
+                .Entries()
+                .Where(e => e.Entity is IAuditInfo && (e.State == EntityState.Added || e.State == EntityState.Modified));
+            foreach (var entry in auditInfoEntries)
+            {
+                var entity = (IAuditInfo)entry.Entity;
+
+                if (entry.State == EntityState.Added)
+                {
+                    if (!entity.PreserveCreatedOn)
+                    {
+                        entity.CreatedOn = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    entity.ModifiedOn = DateTime.Now;
+                }
+            }
         }
     }
 }

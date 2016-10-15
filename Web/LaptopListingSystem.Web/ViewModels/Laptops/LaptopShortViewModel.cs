@@ -1,8 +1,8 @@
 ﻿namespace LaptopListingSystem.Web.ViewModels.Laptops
 {
     using LaptopListingSystem.Data.Models;
+    using LaptopListingSystem.Web.Infrastructure.Mapping;
 
-    using Suls.Common.Mapping;
     public class LaptopShortViewModel : IMapFrom<Laptop>
     {
         public int Id { get; set; }

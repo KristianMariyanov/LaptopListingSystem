@@ -6,9 +6,7 @@
     using AutoMapper;
 
     using LaptopListingSystem.Data.Models;
-    using LaptopListingSystem.Web.ViewModels.Comments;
-
-    using Suls.Common.Mapping;
+    using LaptopListingSystem.Web.Infrastructure.Mapping;
 
     public class LaptopDetailsViewModel : LaptopShortViewModel, IHaveCustomMappings
     {

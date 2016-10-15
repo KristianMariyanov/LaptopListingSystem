@@ -74,6 +74,11 @@ namespace LaptopListingSystem.Web
                 .AddEntityFrameworkStores<LaptopListingSystemDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Administrator", policy => policy.RequireClaim("Administrator"));
+            });
+
             services.AddMemoryCache();
 
             services.AddMvc();

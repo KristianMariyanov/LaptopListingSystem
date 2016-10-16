@@ -3,6 +3,7 @@
 import { HomeComponent } from "./home/home.component";
 import { LaptopDetailsComponent } from "./laptops/laptop-details.component";
 import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
 import { CommentsAdministrationComponent } from "./administration/comments-administration.component";
 import { EditCommentAdministrationComponent } from "./administration/edit-comment-administration.component";
 import { AddCommentAdministrationComponent } from "./administration/add-comment-administration.component";
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: "full" },
     { path: 'laptops/:id', component: LaptopDetailsComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
     { path: 'administration/comments', component: CommentsAdministrationComponent },
     { path: 'administration/comments/edit/:id', component: EditCommentAdministrationComponent },
     { path: 'administration/comments/add', component: AddCommentAdministrationComponent },

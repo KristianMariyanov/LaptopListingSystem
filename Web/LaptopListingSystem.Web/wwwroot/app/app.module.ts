@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LaptopDetailsComponent } from './laptops/laptop-details.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { CommentsAdministrationComponent } from './administration/comments-administration.component';
 import { EditCommentAdministrationComponent } from './administration/edit-comment-administration.component';
 import { AddCommentAdministrationComponent } from "./administration/add-comment-administration.component";
@@ -33,6 +34,7 @@ import { LaptopService } from './services/laptop.service';
         HomeComponent,
         LaptopDetailsComponent,
         LoginComponent,
+        RegisterComponent,
         CommentsAdministrationComponent,
         EditCommentAdministrationComponent,
         AddCommentAdministrationComponent,

@@ -21,7 +21,7 @@
         [HttpPost]
         [AllowAnonymous]
         [Route("[action]")]
-        public async Task<IActionResult> Register([FromForm] string email, string password)
+        public async Task<IActionResult> Register([FromForm]string email, [FromForm]string password)
         {
             var user = new User { UserName = email, Email = email };
             var result = await this.userManager.CreateAsync(user, password);

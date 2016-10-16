@@ -39,7 +39,7 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
         public SigningCredentials SigningCredentials { get; set; }
 
         /// <summary>
-        /// Resolves a user identity given a username and password.
+        /// Resolves a user identity given a email and password.
         /// </summary>
         public Func<HttpContext, Task<ClaimsIdentity>> IdentityResolver { get; set; }
 

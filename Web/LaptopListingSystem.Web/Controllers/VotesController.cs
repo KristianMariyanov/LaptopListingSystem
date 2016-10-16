@@ -29,8 +29,8 @@
             if (laptopId != default(int))
             {
                 // TODO: Prevent user to vote more then once.
-                var userName = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var userId = this.users.All().Where(u => u.UserName == userName).Select(u => u.Id).FirstOrDefault();
+                var email = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = this.users.All().Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
                 var vote = new Vote { LaptopId = laptopId, UserId = userId };
                 this.votes.Add(vote);
                 this.votes.SaveChanges();

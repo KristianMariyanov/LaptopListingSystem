@@ -29,8 +29,8 @@
         {
             if (inputModel != null && this.ModelState.IsValid)
             {
-                var userName = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var userId = this.users.All().Where(u => u.UserName == userName).Select(u => u.Id).FirstOrDefault();
+                var email = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = this.users.All().Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
                 var comment = new Comment { Content = inputModel.Content, LaptopId = inputModel.LaptopId, UserId = userId };
                 this.comments.Add(comment);
                 this.comments.SaveChanges();

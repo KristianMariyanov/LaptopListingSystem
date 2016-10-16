@@ -82,7 +82,7 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
             if (identity == null)
             {
                 context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Invalid username or password.");
+                await context.Response.WriteAsync("Invalid email or password.");
                 return;
             }
 

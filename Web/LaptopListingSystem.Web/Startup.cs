@@ -1,36 +1,35 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-
-using LaptopListingSystem.Data;
-using LaptopListingSystem.Data.Models;
-using LaptopListingSystem.Web.Infrastructure.Extensions;
-using LaptopListingSystem.Web.Infrastructure.TokenProvider;
-
-namespace LaptopListingSystem.Web
+﻿namespace LaptopListingSystem.Web
 {
+    using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Security.Claims;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Threading.Tasks;
+
     using AutoMapper;
 
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.IdentityModel.Tokens;
+
+    using LaptopListingSystem.Data;
+    using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories;
     using LaptopListingSystem.Data.Repositories.Contracts;
     using LaptopListingSystem.Services.Common.Contracts;
     using LaptopListingSystem.Services.Common.Mapping;
+    using LaptopListingSystem.Web.Infrastructure.Extensions;
     using LaptopListingSystem.Web.Infrastructure.Mapping;
+    using LaptopListingSystem.Web.Infrastructure.TokenProvider;
 
     public class Startup
     {
@@ -69,7 +68,14 @@ namespace LaptopListingSystem.Web
                    this.Configuration.GetConnectionString("DefaultConnection"), 
                    builder => builder.MigrationsAssembly("LaptopListingSystem.Web")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(s =>
+                {
+                    s.Password.RequireDigit = false;
+                    s.Password.RequireLowercase = false;
+                    s.Password.RequireUppercase = false;
+                    s.Password.RequireNonAlphanumeric = false;
+                    s.Password.RequiredLength = 6;
+                })
                 .AddEntityFrameworkStores<LaptopListingSystemDbContext>()
                 .AddDefaultTokenProviders();
 

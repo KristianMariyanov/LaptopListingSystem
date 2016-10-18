@@ -35,7 +35,8 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -69,7 +70,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 1000);
+                        .HasAnnotation("MaxLength", 500);
 
                     b.Property<DateTime?>("ModifiedOn");
 
@@ -98,7 +99,8 @@ namespace LaptopListingSystem.Web.Migrations
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 200);
 
                     b.HasKey("Id");
 
@@ -182,7 +184,8 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -309,7 +312,8 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasOne("LaptopListingSystem.Data.Models.User", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LaptopListingSystem.Data.Models.Laptop", b =>
@@ -329,7 +333,8 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasOne("LaptopListingSystem.Data.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

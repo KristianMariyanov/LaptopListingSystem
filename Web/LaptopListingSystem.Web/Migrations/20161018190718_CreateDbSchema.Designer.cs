@@ -8,8 +8,8 @@ using LaptopListingSystem.Data;
 namespace LaptopListingSystem.Web.Migrations
 {
     [DbContext(typeof(LaptopListingSystemDbContext))]
-    [Migration("20161007100449_AddedValudation")]
-    partial class AddedValudation
+    [Migration("20161018190718_CreateDbSchema")]
+    partial class CreateDbSchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("LaptopListingSystem.Data.Models.Laptop", b =>
@@ -71,7 +71,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasAnnotation("MaxLength", 1000);
+                        .HasAnnotation("MaxLength", 500);
 
                     b.Property<DateTime?>("ModifiedOn");
 
@@ -87,7 +87,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasIndex("ManufacturerId");
 
-                    b.ToTable("Laptop");
+                    b.ToTable("Laptops");
                 });
 
             modelBuilder.Entity("LaptopListingSystem.Data.Models.Manufacturer", b =>
@@ -100,14 +100,15 @@ namespace LaptopListingSystem.Web.Migrations
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 200);
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Manufacturer");
+                    b.ToTable("Manufacturers");
                 });
 
             modelBuilder.Entity("LaptopListingSystem.Data.Models.User", b =>
@@ -193,7 +194,7 @@ namespace LaptopListingSystem.Web.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Vote");
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>

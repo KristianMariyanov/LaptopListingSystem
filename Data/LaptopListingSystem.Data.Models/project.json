@@ -2,8 +2,10 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "LaptopListingSystem.Common": "1.0.0-*",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore": "1.0.1",
+    "StyleCop.Analyzers": "1.0.0",
     "System.ComponentModel.Annotations": "4.1.0"
   },
 

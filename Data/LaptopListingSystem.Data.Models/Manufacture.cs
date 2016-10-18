@@ -4,6 +4,7 @@ namespace LaptopListingSystem.Data.Models
 {
     using System.Collections.Generic;
 
+    using LaptopListingSystem.Common.Constants;
     using LaptopListingSystem.Data.Models.Common;
 
     public class Manufacturer : AuditInfo
@@ -18,6 +19,7 @@ namespace LaptopListingSystem.Data.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(ValidationConstants.ManufacturerNameMaxLength)]
         public string Name { get; set; }
 
         public virtual ICollection<Laptop> Laptops

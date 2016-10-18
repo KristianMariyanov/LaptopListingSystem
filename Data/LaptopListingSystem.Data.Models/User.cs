@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
-namespace LaptopListingSystem.Data.Models
+﻿namespace LaptopListingSystem.Data.Models
 {
     using System;
     using System.Collections.Generic;
 
     using LaptopListingSystem.Data.Models.Common.Contracts;
+
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
     public class User : IdentityUser, IDeletableEntity
     {
@@ -13,6 +13,7 @@ namespace LaptopListingSystem.Data.Models
 
         public User()
         {
+            this.CreatedOn = DateTime.Now;
             this.comments = new HashSet<Comment>();
         }
 

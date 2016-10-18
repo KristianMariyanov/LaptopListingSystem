@@ -11,9 +11,8 @@
         public int LaptopId { get; set; }
 
         public Laptop Laptop { get; set; }
-
-        // TODO: Uncomment
-        //[Required]
+        
+        [Required]
         public string UserId { get; set; }
 
         public User User { get; set; }

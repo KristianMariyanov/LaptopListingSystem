@@ -15,6 +15,8 @@
 
         void Delete(T entity);
 
+        void Delete(params object[] id);
+
         void Detach(T entity);
 
         T GetById(params object[] id);

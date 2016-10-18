@@ -1,21 +1,21 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-
-namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
+﻿namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
 {
+    using System;
     using System.Collections.Generic;
+    using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
 
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories.Contracts;
 
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Options;
+
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Token generator middleware component which is added to an HTTP pipeline.
@@ -87,9 +87,7 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
             }
 
             var now = DateTime.UtcNow;
-
-            // Specifically add the jti (nonce), iat (issued timestamp), and sub (subject/user) claims.
-            // You can add other claims here, if you want:
+            
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
@@ -121,8 +119,7 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
                 expires_in = (int)this.options.Expiration.TotalSeconds,
                 is_admin = isAdmin
             };
-
-            // Serialize and return the response
+            
             context.Response.ContentType = "application/json";
             await context.Response.WriteAsync(JsonConvert.SerializeObject(response, this.serializerSettings));
         }
@@ -175,7 +172,7 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
         /// </summary>
         /// <param name="date">The date to convert.</param>
         /// <returns>Seconds since Unix epoch.</returns>
-        public static long ToUnixEpochDate(DateTime date)
-            => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+        public static long ToUnixEpochDate(DateTime date) => 
+            (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
     }
 }

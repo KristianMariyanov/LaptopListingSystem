@@ -30,6 +30,8 @@
 
         public virtual void HardDelete(T entity) => base.Delete(entity);
 
+        public void HardDelete(params object[] id) => base.Delete(id);
+
         public void Undelete(T entity)
         {
             entity.IsDeleted = false;

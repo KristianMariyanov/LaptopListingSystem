@@ -3,17 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using LaptopListingSystem.Data.Models;
-    using LaptopListingSystem.Data.Repositories.Contracts;
-
-    using Microsoft.AspNetCore.Mvc;
-
-    using LaptopListingSystem.Services.Common.Contracts;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Caching.Memory;
 
-    using ViewModels.Laptops;
+    using LaptopListingSystem.Data.Models;
+    using LaptopListingSystem.Data.Repositories.Contracts;
+    using LaptopListingSystem.Services.Common.Contracts;
+    using LaptopListingSystem.Web.ViewModels.Laptops;
 
     [Route("api/[controller]")]
     public class LaptopsController : Controller

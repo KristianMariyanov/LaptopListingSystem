@@ -5,7 +5,6 @@
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories.Contracts;
     using LaptopListingSystem.Services.Common.Contracts;
-    using LaptopListingSystem.Web.Areas.Administration.ViewModels.Comments;
     using LaptopListingSystem.Web.Areas.Administration.ViewModels.Manufacturers;
 
     using Microsoft.AspNetCore.Mvc;

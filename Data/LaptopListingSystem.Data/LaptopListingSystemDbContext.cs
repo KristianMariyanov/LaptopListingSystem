@@ -1,13 +1,13 @@
 ﻿namespace LaptopListingSystem.Data
 {
     using System;
+    using System.Linq;
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Models.Common.Contracts;
-    using System.Linq;
 
     public class LaptopListingSystemDbContext : IdentityDbContext<User>
     {

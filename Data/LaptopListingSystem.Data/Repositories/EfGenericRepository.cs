@@ -70,6 +70,15 @@
             }
         }
 
+        public void Delete(params object[] id)
+        {
+            var entity = this.GetById(id);
+            if (entity != null)
+            {
+                this.Delete(entity);
+            }
+        }
+
         public virtual void Detach(T entity)
         {
             var entry = this.Context.Entry(entity);

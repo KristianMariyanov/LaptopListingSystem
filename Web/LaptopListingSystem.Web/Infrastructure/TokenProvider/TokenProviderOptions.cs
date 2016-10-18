@@ -1,11 +1,12 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.IdentityModel.Tokens;
-
-namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
+﻿namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
 {
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.IdentityModel.Tokens;
+
     /// <summary>
     /// Provides options for <see cref="TokenProviderMiddleware"/>.
     /// </summary>

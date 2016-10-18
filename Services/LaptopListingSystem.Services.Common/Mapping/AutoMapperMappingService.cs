@@ -3,9 +3,9 @@
     using System.Linq;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using LaptopListingSystem.Services.Common.Contracts;
-    using AutoMapper.QueryableExtensions;
 
     public class AutoMapperMappingService : IMappingService
     {

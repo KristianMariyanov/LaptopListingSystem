@@ -11,6 +11,8 @@
 
         void HardDelete(T entity);
 
+        void HardDelete(params object[] id);
+
         void Undelete(T entity);
     }
 }

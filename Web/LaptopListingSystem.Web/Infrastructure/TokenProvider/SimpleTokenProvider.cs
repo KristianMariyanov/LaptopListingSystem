@@ -1,9 +1,10 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Options;
-
-namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
+﻿namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
 {
+    using System;
+
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.Extensions.Options;
+
     /// <summary>
     /// Adds a token generation endpoint to an application pipeline.
     /// </summary>
@@ -14,7 +15,7 @@ namespace LaptopListingSystem.Web.Infrastructure.TokenProvider
         /// <param name="app">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
         /// <param name="options">A  <see cref="TokenProviderOptions"/> that specifies options for the middleware.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        /// </
+        /// </summary>
         public static IApplicationBuilder UseSimpleTokenProvider(this IApplicationBuilder app, TokenProviderOptions options)
         {
             if (app == null)

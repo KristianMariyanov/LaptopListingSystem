@@ -5,20 +5,23 @@
 
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories.Contracts;
+    using LaptopListingSystem.Services.Data.Contracts;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize(Policy = "Administrator")]
     [Route("api/[controller]")]
-    public class VotesController : Controller
+    public class VotesController : BaseController
     {
         private readonly IDeletableEntityRepository<Vote> votes;
         private readonly IDeletableEntityRepository<User> users;
 
         public VotesController(
+            IUsersDataService usersData,
             IDeletableEntityRepository<Vote> votes,
             IDeletableEntityRepository<User> users)
+            : base(usersData)
         {
             this.votes = votes;
             this.users = users;

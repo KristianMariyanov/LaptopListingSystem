@@ -6,6 +6,8 @@
     "LaptopListingSystem.Data": "1.0.0-*",
     "LaptopListingSystem.Data.Models": "1.0.0-*",
     "LaptopListingSystem.Services.Common": "1.0.0-*",
+    "LaptopListingSystem.Services.Data": "1.0.0-*",
+    "LaptopListingSystem.Services.Administration": "1.0.0-*",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.0.0",
@@ -39,7 +41,8 @@
     },
     "StyleCop.Analyzers": "1.0.0",
     "System.Linq.Queryable": "4.0.1",
-    "System.Reflection": "4.1.0"
+    "System.Reflection": "4.1.0",
+    "System.Linq": "4.1.0"
   },
 
   "tools": {

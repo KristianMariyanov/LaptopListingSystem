@@ -8,8 +8,6 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using AutoMapper;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -23,12 +21,7 @@
 
     using LaptopListingSystem.Data;
     using LaptopListingSystem.Data.Models;
-    using LaptopListingSystem.Data.Repositories;
-    using LaptopListingSystem.Data.Repositories.Contracts;
-    using LaptopListingSystem.Services.Common.Contracts;
-    using LaptopListingSystem.Services.Common.Mapping;
     using LaptopListingSystem.Web.Infrastructure.Extensions;
-    using LaptopListingSystem.Web.Infrastructure.Mapping;
     using LaptopListingSystem.Web.Infrastructure.TokenProvider;
 
     public class Startup
@@ -89,11 +82,7 @@
             services.AddMvc();
 
             // Custom
-            services.AddTransient(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
-            services.AddTransient(typeof(IRepository<>), typeof(EfGenericRepository<>));
-            services.AddTransient<DbContext, LaptopListingSystemDbContext>();
-            services.AddScoped<IMappingService, AutoMapperMappingService>();
-            services.AddScoped<IMapper>(ctx => AutoMapperConfig.MapperConfiguration?.CreateMapper());
+            services.AddLaptopListingSystemServices();
         }
         
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

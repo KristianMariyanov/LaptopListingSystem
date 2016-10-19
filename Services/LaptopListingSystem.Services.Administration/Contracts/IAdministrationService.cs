@@ -2,6 +2,8 @@
 {
     using System.Linq;
 
+    using LaptopListingSystem.Services.Common;
+
     public interface IAdministrationService<TEntity>
         where TEntity : class
     {

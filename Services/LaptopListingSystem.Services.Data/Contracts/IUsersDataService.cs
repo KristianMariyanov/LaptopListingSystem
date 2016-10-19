@@ -6,5 +6,7 @@
     public interface IUsersDataService : IService
     {
         User GetUserByEmail(string email);
+
+        string GetUserIdByEmail(string email);
     }
 }

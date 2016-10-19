@@ -4,22 +4,24 @@
 
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories.Contracts;
+    using LaptopListingSystem.Services.Administration.Contracts;
     using LaptopListingSystem.Services.Common.Contracts;
+    using LaptopListingSystem.Services.Data.Contracts;
     using LaptopListingSystem.Web.Areas.Administration.InputModels.Laptops;
     using LaptopListingSystem.Web.Areas.Administration.ViewModels.Laptops;
 
     using Microsoft.AspNetCore.Mvc;
 
-    public class LaptopsController : BaseAdministrationController
+    public class LaptopsController : BaseAdministrationController<Laptop>
     {
-        private readonly IRepository<Laptop> laptops;
         private readonly IMappingService mappingService;
 
         public LaptopsController(
-            IRepository<Laptop> laptops,
+            IUsersDataService usersData,
+            IAdministrationService<Laptop> administrationService,
             IMappingService mappingService)
+            : base(usersData, administrationService)
         {
-            this.laptops = laptops;
             this.mappingService = mappingService;
         }
 
@@ -27,7 +29,7 @@
         public IActionResult Get()
         {
             var laptopModels = this.mappingService.MapCollection<LaptopViewModel>(
-                this.laptops.All().OrderByDescending(l => l.CreatedOn));
+                this.AdministrationService.Read().OrderByDescending(l => l.CreatedOn));
 
             return this.Json(laptopModels);
         }
@@ -36,7 +38,7 @@
         public IActionResult Get(int id)
         {
             var laptopModel = this.mappingService
-                .MapCollection<LaptopViewModel>(this.laptops.All().Where(c => c.Id == id))
+                .MapCollection<LaptopViewModel>(this.AdministrationService.Read().Where(c => c.Id == id))
                 .FirstOrDefault();
 
             return this.Json(laptopModel);
@@ -45,11 +47,10 @@
         [HttpPost]
         public IActionResult Post([FromBody]LaptopInputModel inputModel)
         {
-            if (inputModel != null)
+            if (inputModel != null && this.ModelState.IsValid)
             {
                 var laptop = this.mappingService.Map<Laptop>(inputModel);
-                this.laptops.Add(laptop);
-                this.laptops.SaveChanges();
+                this.AdministrationService.Create(laptop);
 
                 return this.Created(string.Empty, laptop);
             }
@@ -62,10 +63,10 @@
         {
             if (inputModel != null)
             {
-                var laptop = this.laptops.GetById(inputModel.Id);
+                var laptop = this.AdministrationService.Get(inputModel.Id);
 
                 this.mappingService.Map(inputModel, laptop);
-                this.laptops.SaveChanges();
+                this.AdministrationService.Update(laptop);
 
                 return this.Ok();
             }
@@ -78,9 +79,7 @@
         {
             if (laptopId != default(int))
             {
-                var lapptop = this.laptops.GetById(laptopId);
-                this.laptops.Delete(lapptop);
-                this.laptops.SaveChanges();
+                this.AdministrationService.Delete(laptopId);
 
                 return this.Ok();
             }

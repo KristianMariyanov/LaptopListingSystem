@@ -4,6 +4,7 @@
   "dependencies": {
     "LaptopListingSystem.Data": "1.0.0-*",
     "LaptopListingSystem.Data.Models": "1.0.0-*",
+    "LaptopListingSystem.Services.Common": "1.0.0-*",
     "StyleCop.Analyzers": "1.0.0",
     "System.Linq.Expressions": "4.1.0"
   },

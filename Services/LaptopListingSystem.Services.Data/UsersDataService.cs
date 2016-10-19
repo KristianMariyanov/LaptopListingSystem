@@ -16,5 +16,8 @@
 
         public User GetUserByEmail(string email) => 
             this.users.All().FirstOrDefault(u => u.Email == email);
+
+        public string GetUserIdByEmail(string email) =>
+            this.users.All().Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
     }
 }

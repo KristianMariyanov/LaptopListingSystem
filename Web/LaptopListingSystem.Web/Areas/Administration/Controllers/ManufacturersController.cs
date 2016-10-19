@@ -4,21 +4,23 @@
 
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories.Contracts;
+    using LaptopListingSystem.Services.Administration.Contracts;
     using LaptopListingSystem.Services.Common.Contracts;
+    using LaptopListingSystem.Services.Data.Contracts;
     using LaptopListingSystem.Web.Areas.Administration.ViewModels.Manufacturers;
 
     using Microsoft.AspNetCore.Mvc;
 
-    public class ManufacturersController : BaseAdministrationController
+    public class ManufacturersController : BaseAdministrationController<Manufacturer>
     {
-        private readonly IRepository<Manufacturer> manufacturers;
         private readonly IMappingService mappingService;
 
         public ManufacturersController(
-            IRepository<Manufacturer> manufacturers,
+            IUsersDataService usersData,
+            IAdministrationService<Manufacturer> administrationService,
             IMappingService mappingService)
+            : base(usersData, administrationService)
         {
-            this.manufacturers = manufacturers;
             this.mappingService = mappingService;
         }
 
@@ -26,7 +28,7 @@
         public IActionResult Get()
         {
             var commentModels = this.mappingService.MapCollection<ManufacturerViewModel>(
-                this.manufacturers.All().OrderByDescending(l => l.CreatedOn));
+                this.AdministrationService.Read().OrderByDescending(l => l.CreatedOn));
 
             return this.Json(commentModels);
         }
@@ -34,9 +36,7 @@
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var manufacturerModel = this.mappingService
-                .MapCollection<ManufacturerViewModel>(this.manufacturers.All().Where(c => c.Id == id))
-                .FirstOrDefault();
+            var manufacturerModel = this.mappingService.Map<ManufacturerViewModel>(this.AdministrationService.Get(id));
 
             return this.Json(manufacturerModel);
         }
@@ -47,8 +47,7 @@
             if (!string.IsNullOrWhiteSpace(name))
             {
                 var manufacturer = new Manufacturer { Name = name };
-                this.manufacturers.Add(manufacturer);
-                this.manufacturers.SaveChanges();
+                this.AdministrationService.Create(manufacturer);
 
                 return this.Created(string.Empty, manufacturer);
             }
@@ -61,13 +60,14 @@
         {
             if (!string.IsNullOrWhiteSpace(name) && manufacturerId != default(int))
             {
-                var comment = this.manufacturers.GetById(manufacturerId);
+                var comment = this.AdministrationService.Get(manufacturerId);
+                if (comment != null)
+                {
+                    comment.Name = name;
+                    this.AdministrationService.Update(comment);
 
-                comment.Name = name;
-
-                this.manufacturers.SaveChanges();
-
-                return this.Ok();
+                    return this.Ok();
+                }
             }
 
             return this.BadRequest("Invalid input");
@@ -78,9 +78,7 @@
         {
             if (manufacturerId != default(int))
             {
-                var comment = this.manufacturers.GetById(manufacturerId);
-                this.manufacturers.Delete(comment);
-                this.manufacturers.SaveChanges();
+                this.AdministrationService.Delete(manufacturerId);
 
                 return this.Ok();
             }

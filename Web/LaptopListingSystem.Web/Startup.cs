@@ -21,6 +21,7 @@
 
     using LaptopListingSystem.Data;
     using LaptopListingSystem.Data.Models;
+    using LaptopListingSystem.Data.Seed;
     using LaptopListingSystem.Web.Infrastructure.Extensions;
     using LaptopListingSystem.Web.Infrastructure.TokenProvider;
 
@@ -142,6 +143,8 @@
 
             app.RegisterAutoMapperMappings(
                 typeof(Startup).GetTypeInfo().Assembly);
+
+            LaptopListingSystemDbContextSeed.Seed(app);
         }
 
         private async Task<ClaimsIdentity> GetIdentity(HttpContext context)

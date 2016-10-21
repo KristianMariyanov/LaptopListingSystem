@@ -4,52 +4,52 @@
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !model.valid }">
         <label for="model">Model</label>
         <input type="text" class="form-control" name="model" [(ngModel)]="laptop.model" #model="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !model.valid" class="help-block">Model is required</div>
+        <div *ngIf="laptopForm.submitted && !model.valid" class="help-block">Model is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !imageUrl.valid }">
         <label for="imageUrl">Image url</label>
         <input type="text" class="form-control" name="imageUrl" [(ngModel)]="laptop.imageUrl" #imageUrl="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !imageUrl.valid" class="help-block">Image url is required</div>
+        <div *ngIf="laptopForm.submitted && !imageUrl.valid" class="help-block">Image url is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !price.valid }">
         <label for="price">Price</label>
         <input type="number" class="form-control" name="price" [(ngModel)]="laptop.price" #price="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !price.valid" class="help-block">Price is required</div>
+        <div *ngIf="laptopForm.submitted && !price.valid" class="help-block">Price is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !ram.valid }">
         <label for="ram">Ram</label>
         <input type="number" class="form-control" name="ram" [(ngModel)]="laptop.ram" #ram="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !ram.valid" class="help-block">Ram is required</div>
+        <div *ngIf="laptopForm.submitted && !ram.valid" class="help-block">Ram is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !weight.valid }">
         <label for="weight">Weight</label>
-        <input type="number" class="form-control" name="weight" [(ngModel)]="laptop.weight" #weight="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !weight.valid" class="help-block">Weidth is required</div>
+        <input type="number" class="form-control" name="weight" [(ngModel)]="laptop.weight" #weight="ngModel" />
+        <div *ngIf="laptopForm.submitted && !weight.valid" class="help-block">Weidth is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !manufacturerId.valid }">
         <label for="manufacturerId">Manufacturer Id</label>
         <input type="number" class="form-control" name="manufacturerId" [(ngModel)]="laptop.manufacturerId" #manufacturerId="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !manufacturerId.valid" class="help-block">Manufacturer Id is required</div>
+        <div *ngIf="laptopForm.submitted && !manufacturerId.valid" class="help-block">Manufacturer Id is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !description.valid }">
         <label for="description">Description</label>
-        <input type="text" class="form-control" name="description" [(ngModel)]="laptop.description" #description="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !description.valid" class="help-block">Description is required</div>
+        <input type="text" class="form-control" name="description" [(ngModel)]="laptop.description" #description="ngModel" />
+        <div *ngIf="laptopForm.submitted && !description.valid" class="help-block">Description is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !additionalParts.valid }">
         <label for="additionalParts">Additional parts</label>
-        <input type="text" class="form-control" name="additionalParts" [(ngModel)]="laptop.additionalParts" #additionalParts="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !additionalParts.valid" class="help-block">Additional parts are required</div>
+        <input type="text" class="form-control" name="additionalParts" [(ngModel)]="laptop.additionalParts" #additionalParts="ngModel" />
+        <div *ngIf="laptopForm.submitted && !additionalParts.valid" class="help-block">Additional parts are not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !hardDisk.valid }">
         <label for="hardDisk">Hard disk</label>
         <input type="number" class="form-control" name="hardDisk" [(ngModel)]="laptop.hardDisk" #hardDisk="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !hardDisk.valid" class="help-block">Hard disk is required</div>
+        <div *ngIf="laptopForm.submitted && !hardDisk.valid" class="help-block">Hard disk is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !monitor.valid }">
         <label for="monitor">Monitor</label>
         <input type="number" class="form-control" name="monitor" [(ngModel)]="laptop.monitor" #monitor="ngModel" required />
-        <div *ngIf="laptopForm.submitted && !monitor.valid" class="help-block">Monitor is required</div>
+        <div *ngIf="laptopForm.submitted && !monitor.valid" class="help-block">Monitor is not valid</div>
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary" value="Add laptop">

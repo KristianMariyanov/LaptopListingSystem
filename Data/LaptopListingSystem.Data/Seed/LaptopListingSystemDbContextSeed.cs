@@ -12,17 +12,16 @@
     {
         public static void Seed(IApplicationBuilder app)
         {
-            using (var context = app.ApplicationServices.GetRequiredService<LaptopListingSystemDbContext>())
+            var context = app.ApplicationServices.GetRequiredService<LaptopListingSystemDbContext>();
+
+            if (!context.Roles.Any())
             {
-                if (!context.Roles.Any())
-                {
-                    context.Roles.Add(
-                        new IdentityRole
-                        {
-                            Name = RoleNameConstants.Administrator,
-                            NormalizedName = RoleNameConstants.Administrator
-                        });
-                }
+                context.Roles.Add(
+                    new IdentityRole
+                    {
+                        Name = RoleNameConstants.Administrator,
+                        NormalizedName = RoleNameConstants.Administrator
+                    });
             }
         }
     }

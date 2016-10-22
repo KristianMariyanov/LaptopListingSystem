@@ -34,9 +34,9 @@ export class AddLaptopAdministrationComponent {
             this.laptop.hardDisk,
             this.laptop.monitor)
             .subscribe(
-                result => {
-                    this.router.navigate(['/administration/laptops']);
-                },
-                error => this.errorMessage = <any>error);
+	            result => {
+	                this.router.navigate(['/administration/laptops']);
+	            },
+	            error => this.errorMessage = <any>error);
     }
 }

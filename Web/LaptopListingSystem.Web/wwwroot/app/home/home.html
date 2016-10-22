@@ -1,10 +1,20 @@
 ﻿<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
-<input type="text" #searchTerm /><br />
-Order by: <br/>
-<input type="radio" name="order" (click)="order='ram'">Ram
-<input type="radio" name="order" (click)="order='votes'">Votes
-<input type="radio" name="order" (click)="order='comment'">Comment
-<button (click)="filterLaptops(searchTerm.value)">Get Reults</button>
+<form class="form-inline">
+    <div class="form-group">
+        <input type="text" class="form-control" id="searchTerm" placeholder="Search..." #searchTerm>
+    </div>
+    <span>Order By:</span>
+    <label class="radio-inline">
+        <input type="radio" name="order" (click)="order='ram'">Ram
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="order" (click)="order='votes'">Votes
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="order" (click)="order='comment'">Comments
+    </label>
+    <button (click)="filterLaptops(searchTerm.value)" class="btn btn-default">Get Results</button>
+</form>
 
 <ul>
     <li class="col-xs-4" *ngFor="let laptop of laptops">

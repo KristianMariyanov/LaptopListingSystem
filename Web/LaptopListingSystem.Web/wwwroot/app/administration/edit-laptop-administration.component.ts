@@ -1,27 +1,30 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { LaptopDetails } from '../laptop-details';
+import { Manufacturer } from '../manufacturer';
 import { LaptopsService } from '../services/administration/laptops.service';
+import { ManufacturersService } from '../services/administration/manufacturers.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/administration/edit-laptop.html',
-    providers: [LaptopsService]
+    providers: [LaptopsService, ManufacturersService]
 })
 
-export class EditLaptopAdministrationComponent {
+export class EditLaptopAdministrationComponent implements OnInit {
     errorMessage: string;
     laptop: LaptopDetails = new LaptopDetails();
+    manufacturers: Manufacturer[] = [];
 
     constructor(
         private laptopsService: LaptopsService,
+        private manufacturersService: ManufacturersService,
         private route: ActivatedRoute,
         private router: Router) {
     }
 
     ngOnInit() {
-        console.log('init');
         this.route.params.forEach((params: Params) => {
             let id = + params['id'];
             let laptop = this.laptopsService.getLaptop(id);
@@ -30,6 +33,11 @@ export class EditLaptopAdministrationComponent {
                 laptop => this.laptop = laptop,
                 error => this.errorMessage = <any>error);
         });
+
+        this.manufacturersService.getManufacturers()
+            .subscribe(
+            manufacturers => this.manufacturers = manufacturers,
+            error => this.errorMessage = <any>error);
     }
 
     updateLaptop() {

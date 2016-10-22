@@ -1,25 +1,34 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
 import { LaptopDetails } from '../laptop-details';
+import { Manufacturer } from '../manufacturer';
 import { LaptopsService } from '../services/administration/laptops.service';
+import { ManufacturersService } from '../services/administration/manufacturers.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/administration/add-laptop.html',
-    providers: [LaptopsService]
+    providers: [LaptopsService, ManufacturersService]
 })
 
-export class AddLaptopAdministrationComponent {
+export class AddLaptopAdministrationComponent implements OnInit {
     errorMessage: string;
     laptop: LaptopDetails = new LaptopDetails();
+    manufacturers: Manufacturer[] = [];
 
     constructor(
         private laptopsService: LaptopsService,
+        private manufacturersService: ManufacturersService,
         private router: Router) {
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.manufacturersService.getManufacturers()
+            .subscribe(
+                manufacturers => this.manufacturers = manufacturers,
+                error => this.errorMessage = <any> error);
+    }
 
     addLaptop() {
         this.laptopsService.addLaptop(

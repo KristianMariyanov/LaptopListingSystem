@@ -28,7 +28,12 @@
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !manufacturerId.valid }">
         <label for="manufacturerId">Manufacturer Id</label>
-        <input type="number" class="form-control" name="manufacturerId" [(ngModel)]="laptop.manufacturerId" #manufacturerId="ngModel" required />
+        <select class="form-control" [(ngModel)]="laptop.manufacturerId" name="manufacturerId" #manufacturerId="ngModel">
+            <option *ngFor="let manufacturer of manufacturers"
+                    [value]="manufacturer.id">
+                {{manufacturer.name}}
+            </option>
+        </select>
         <div *ngIf="laptopForm.submitted && !manufacturerId.valid" class="help-block">Manufacturer Id is not valid</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !description.valid }">

@@ -11,6 +11,8 @@
 
         public string ManufacturerName { get; set; }
 
+        public string ManufacturerId { get; set; }
+
         public string ImageUrl { get; set; }
 
         public decimal Price { get; set; }

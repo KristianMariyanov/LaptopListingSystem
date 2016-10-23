@@ -9,8 +9,7 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    [Authorize(Policy = "Administrator")]
+    
     [Route("api/[controller]")]
     public class VotesController : BaseController
     {

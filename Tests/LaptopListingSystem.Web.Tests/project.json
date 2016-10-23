@@ -20,5 +20,7 @@
         "portable-net45+win8"
       ]
     }
-  }
+  },
+
+  "testRunner": "xunit"
 }

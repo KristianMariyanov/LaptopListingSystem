@@ -9,6 +9,7 @@
     using LaptopListingSystem.Services.Data.Contracts;
     using LaptopListingSystem.Web.Areas.Administration.InputModels.Laptops;
     using LaptopListingSystem.Web.Areas.Administration.ViewModels.Laptops;
+    using LaptopListingSystem.Web.ViewModels.Common;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,14 @@
             var laptopModel = this.mappingService
                 .MapCollection<LaptopViewModel>(this.AdministrationService.Read().Where(c => c.Id == id))
                 .FirstOrDefault();
+
+            return this.Json(laptopModel);
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult GetDropdownItems()
+        {
+            var laptopModel = this.mappingService.MapCollection<DropdownViewModel>(this.AdministrationService.Read());
 
             return this.Json(laptopModel);
         }

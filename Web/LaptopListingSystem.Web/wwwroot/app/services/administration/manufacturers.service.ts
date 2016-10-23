@@ -16,6 +16,10 @@ export class ManufacturersService extends BaseAdministrationService {
         return this.getAll(this.baseManufacturersUrl);
     }
 
+    getDropdownItems(): Observable<any> {
+        return this.getAll(`${this.baseManufacturersUrl}/getdropdownitems`);
+    }
+
     addManufacturer(name: string): Observable<any> {
         return this.add(this.baseManufacturersUrl, `name=${name}`);
     }

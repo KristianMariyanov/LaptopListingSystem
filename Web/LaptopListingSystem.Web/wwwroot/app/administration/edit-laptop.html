@@ -17,12 +17,12 @@
         <div *ngIf="laptopForm.submitted && !price.valid" class="help-block">Price is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': laptopForm.submitted && !manufacturerId.valid }">
-        <label for="manufacturerId">Manufacturer Id</label>
+        <label for="manufacturerId">Manufacturer</label>
         <select class="form-control" [(ngModel)]="laptop.manufacturerId" name="manufacturerId" #manufacturerId="ngModel">
-            <option *ngFor="let manufacturer of manufacturers"
-                    [selected]="laptop.manufacturerId == manufacturerId ? true : null"
-                    [value]="manufacturer.id">
-                {{manufacturer.name}}
+            <option *ngFor="let dropdownItem of dropdownItems"
+                    [selected]="laptop.manufacturerId == dropdownItem.id ? true : null"
+                    [value]="dropdownItem.id">
+                {{dropdownItem.name}}
             </option>
         </select>
         <div *ngIf="laptopForm.submitted && !manufacturerId.valid" class="help-block">Manufacturer Id is not valid</div>

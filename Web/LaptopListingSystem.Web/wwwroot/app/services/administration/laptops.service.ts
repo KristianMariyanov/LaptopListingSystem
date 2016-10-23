@@ -16,6 +16,10 @@ export class LaptopsService extends BaseAdministrationService {
         return this.getAll(this.baseLaptopsUrl);
     }
 
+    getDropdownItems(): Observable<any> {
+        return this.getAll(`${this.baseLaptopsUrl}/getdropdownitems`);
+    }
+
     addLaptop(
         model: string,
         manufacturerId: number,

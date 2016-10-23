@@ -2,23 +2,26 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Comment } from '../comment';
+import { DropdownItem } from '../dropdown-item';
 import { CommentsService } from '../services/administration/comments.service';
+import { LaptopsService } from '../services/administration/laptops.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/administration/edit-comment.html',
-    providers: [CommentsService]
+    providers: [CommentsService, LaptopsService]
 })
 
 export class EditCommentAdministrationComponent {
     errorMessage: string;
     comment: Comment = new Comment();
+    dropdownItems: DropdownItem[] = [];
 
     constructor(
         private commentsService: CommentsService,
+        private laptopsService: LaptopsService,
         private route: ActivatedRoute,
         private router: Router) {
-        console.log('constructor');
     }
 
     ngOnInit() {
@@ -31,6 +34,11 @@ export class EditCommentAdministrationComponent {
                 comment => this.comment = comment,
                 error => this.errorMessage = <any>error);
         });
+
+        this.laptopsService.getDropdownItems()
+            .subscribe(
+                dropdownItems => this.dropdownItems = dropdownItems,
+                error => this.errorMessage = <any>error);
     }
 
     updateComment() {

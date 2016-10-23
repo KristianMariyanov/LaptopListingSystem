@@ -2,7 +2,7 @@
 import { Params, Router } from '@angular/router';
 
 import { LaptopDetails } from '../laptop-details';
-import { Manufacturer } from '../manufacturer';
+import { DropdownItem } from '../dropdown-item';
 import { LaptopsService } from '../services/administration/laptops.service';
 import { ManufacturersService } from '../services/administration/manufacturers.service';
 
@@ -15,7 +15,7 @@ import { ManufacturersService } from '../services/administration/manufacturers.s
 export class AddLaptopAdministrationComponent implements OnInit {
     errorMessage: string;
     laptop: LaptopDetails = new LaptopDetails();
-    manufacturers: Manufacturer[] = [];
+    dropdownItems: DropdownItem[] = [];
 
     constructor(
         private laptopsService: LaptopsService,
@@ -24,9 +24,9 @@ export class AddLaptopAdministrationComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.manufacturersService.getManufacturers()
+        this.manufacturersService.getDropdownItems()
             .subscribe(
-                manufacturers => this.manufacturers = manufacturers,
+                dropdownItems => this.dropdownItems = dropdownItems,
                 error => this.errorMessage = <any> error);
     }
 

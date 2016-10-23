@@ -8,7 +8,13 @@
     </div>
     <div class="form-laptopId" [ngClass]="{ 'has-error': commentForm.submitted && !laptopId.valid }">
         <label for="laptopId">Laptop Id</label>
-        <input type="text" class="form-control" name="laptopId" [(ngModel)]="comment.laptopId" #laptopId="ngModel" required />
+        <select class="form-control" [(ngModel)]="comment.laptopId" name="laptopId" #laptopId="ngModel">
+            <option *ngFor="let dropdownItem of dropdownItems"
+                    [selected]="comment.laptopId == dropdownItem.id ? true : null"
+                    [value]="dropdownItem.id">
+                {{dropdownItem.name}}
+            </option>
+        </select>
         <div *ngIf="commentForm.submitted && !laptopId.valid" class="help-block">Laptop Id is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': commentForm.submitted && !content.valid }">

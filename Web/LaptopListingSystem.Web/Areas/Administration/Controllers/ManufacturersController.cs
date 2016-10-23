@@ -8,6 +8,7 @@
     using LaptopListingSystem.Services.Common.Contracts;
     using LaptopListingSystem.Services.Data.Contracts;
     using LaptopListingSystem.Web.Areas.Administration.ViewModels.Manufacturers;
+    using LaptopListingSystem.Web.ViewModels.Common;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +40,14 @@
             var manufacturerModel = this.mappingService.Map<ManufacturerViewModel>(this.AdministrationService.Get(id));
 
             return this.Json(manufacturerModel);
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult GetDropdownItems()
+        {
+            var laptopModel = this.mappingService.MapCollection<DropdownViewModel>(this.AdministrationService.Read());
+
+            return this.Json(laptopModel);
         }
 
         [HttpPost]

@@ -1,11 +1,11 @@
 ﻿import { Component } from '@angular/core';
 
-import { LaptopDetails } from '../laptop-details';
-import { LaptopsService } from '../services/administration/laptops.service';
+import { LaptopDetails } from '../../laptop-details';
+import { LaptopsService } from '../../services/administration/laptops.service';
 
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/administration/laptops.html',
+    templateUrl: 'app/administration/laptops/laptops.html',
     providers: [LaptopsService]
 })
 

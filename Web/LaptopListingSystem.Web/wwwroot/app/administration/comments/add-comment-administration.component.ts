@@ -1,14 +1,14 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
-import { Comment } from '../comment';
-import { DropdownItem } from '../dropdown-item'
-import { CommentsService } from '../services/administration/comments.service';
-import { LaptopsService } from '../services/administration/laptops.service';
+import { Comment } from '../../comment';
+import { DropdownItem } from '../../dropdown-item'
+import { CommentsService } from '../../services/administration/comments.service';
+import { LaptopsService } from '../../services/administration/laptops.service';
 
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/administration/add-comment.html',
+    templateUrl: 'app/administration/comments/add-comment.html',
     providers: [CommentsService, LaptopsService]
 })
 

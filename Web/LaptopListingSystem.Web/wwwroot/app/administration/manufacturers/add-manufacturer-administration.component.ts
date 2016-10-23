@@ -1,12 +1,12 @@
 ﻿import { Component } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
-import { Manufacturer } from '../manufacturer';
-import { ManufacturersService } from '../services/administration/manufacturers.service';
+import { Manufacturer } from '../../manufacturer';
+import { ManufacturersService } from '../../services/administration/manufacturers.service';
 
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/administration/add-manufacturer.html',
+    templateUrl: 'app/administration/manufacturers/add-manufacturer.html',
     providers: [ManufacturersService]
 })
 

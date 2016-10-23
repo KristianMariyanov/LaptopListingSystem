@@ -1,11 +1,11 @@
 ﻿import { Component } from '@angular/core';
 
-import { Comment } from '../comment';
-import { CommentsService } from '../services/administration/comments.service';
+import { Comment } from '../../comment';
+import { CommentsService } from '../../services/administration/comments.service';
 
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/administration/comments.html',
+    templateUrl: 'app/administration/comments/comments.html',
     providers: [CommentsService]
 })
 

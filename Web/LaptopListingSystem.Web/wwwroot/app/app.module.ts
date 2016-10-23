@@ -4,21 +4,21 @@ import { HttpModule, Http } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { routing } from './app.routes';
-
+import { AuthGuard } from "./guards/auth.guard";
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LaptopDetailsComponent } from './laptops/laptop-details.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { CommentsAdministrationComponent } from './administration/comments-administration.component';
-import { EditCommentAdministrationComponent } from './administration/edit-comment-administration.component';
-import { AddCommentAdministrationComponent } from "./administration/add-comment-administration.component";
-import { ManufacturersAdministrationComponent } from "./administration/manufacturers-administration.component";
-import { EditManufacturerAdministrationComponent } from "./administration/edit-manufacturer-administration.component";
-import { AddManufacturerAdministrationComponent } from "./administration/add-manufacturer-administration.component";
-import { LaptopsAdministrationComponent } from "./administration/laptops-administration.component";
-import { EditLaptopAdministrationComponent } from "./administration/edit-laptop-administration.component";
-import { AddLaptopAdministrationComponent } from "./administration/add-laptop-administration.component";
+import { CommentsAdministrationComponent } from './administration/comments/comments-administration.component';
+import { EditCommentAdministrationComponent } from './administration/comments/edit-comment-administration.component';
+import { AddCommentAdministrationComponent } from "./administration/comments/add-comment-administration.component";
+import { ManufacturersAdministrationComponent } from "./administration/manufacturers/manufacturers-administration.component";
+import { EditManufacturerAdministrationComponent } from "./administration/manufacturers/edit-manufacturer-administration.component";
+import { AddManufacturerAdministrationComponent } from "./administration/manufacturers/add-manufacturer-administration.component";
+import { LaptopsAdministrationComponent } from "./administration/laptops/laptops-administration.component";
+import { EditLaptopAdministrationComponent } from "./administration/laptops/edit-laptop-administration.component";
+import { AddLaptopAdministrationComponent } from "./administration/laptops/add-laptop-administration.component";
 
 import { LaptopService } from './services/laptop.service';
 
@@ -44,6 +44,9 @@ import { LaptopService } from './services/laptop.service';
         LaptopsAdministrationComponent,
         EditLaptopAdministrationComponent,
         AddLaptopAdministrationComponent
+    ],
+    providers: [
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

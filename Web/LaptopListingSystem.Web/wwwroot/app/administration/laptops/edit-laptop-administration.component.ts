@@ -1,14 +1,14 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { LaptopDetails } from '../laptop-details';
-import { DropdownItem } from '../dropdown-item';
-import { LaptopsService } from '../services/administration/laptops.service';
-import { ManufacturersService } from '../services/administration/manufacturers.service';
+import { LaptopDetails } from '../../laptop-details';
+import { DropdownItem } from '../../dropdown-item';
+import { LaptopsService } from '../../services/administration/laptops.service';
+import { ManufacturersService } from '../../services/administration/manufacturers.service';
 
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/administration/edit-laptop.html',
+    templateUrl: 'app/administration/laptops/edit-laptop.html',
     providers: [LaptopsService, ManufacturersService]
 })
 

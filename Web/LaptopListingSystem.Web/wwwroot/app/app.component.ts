@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, DoCheck } from '@angular/core';
 import { AuthenticationService } from './services/auth.service';
 
 @Component({
@@ -6,10 +6,10 @@ import { AuthenticationService } from './services/auth.service';
     templateUrl: 'app/layout.html',
     providers: [AuthenticationService]
 })
-export class AppComponent {
+export class AppComponent implements DoCheck{
     isLoggedIn: boolean = false;
-
-    ngOnInit() {
+    
+    ngDoCheck(): void {
         if (localStorage.getItem('currentUser')) {
             this.isLoggedIn = true;
         }

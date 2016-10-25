@@ -29,18 +29,16 @@ export class LaptopService extends BaseService {
 
     addComment(content: string, laptopId: number): Observable<any> {
         let headers = this.getAuthorizationHeader();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.addCommentUrl, `content=${content}&laptopId=${laptopId}`, options)
+        return this.http.post(this.addCommentUrl, { content: content, laptopId: laptopId }, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     addVote(laptopId: number): Observable<any> {
         let headers = this.getAuthorizationHeader();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.addVoteUrl, `laptopId=${laptopId}`, options)
+        return this.http.post(this.addVoteUrl, { laptopId: laptopId }, options)
             .map(this.extractData)
             .catch(this.handleError);
     }

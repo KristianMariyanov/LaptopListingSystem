@@ -92,6 +92,7 @@
                 laptopsQuery = laptopsQuery.Where(l => l.Model.Contains(term) || l.Manufacturer.Name.Contains(term));
             }
 
+            // TODO: Use enum
             if (order == "ram")
             {
                 laptopsQuery = laptopsQuery.OrderByDescending(l => l.Ram);

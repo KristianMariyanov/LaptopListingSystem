@@ -6,6 +6,7 @@
     using LaptopListingSystem.Data.Models;
     using LaptopListingSystem.Data.Repositories.Contracts;
     using LaptopListingSystem.Services.Data.Contracts;
+    using LaptopListingSystem.Web.InputModels.Votes;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -26,14 +27,14 @@
             this.users = users;
         }
 
-        public IActionResult Post(int laptopId)
+        public IActionResult Post([FromBody]VoteInputModel inputModel)
         {
-            if (laptopId != default(int))
+            if (this.ModelState.IsValid)
             {
                 // TODO: Prevent user to vote more then once.
                 var email = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var userId = this.users.All().Where(u => u.Email == email).Select(u => u.Id).FirstOrDefault();
-                var vote = new Vote { LaptopId = laptopId, UserId = userId };
+                var vote = new Vote { LaptopId = inputModel.LaptopId, UserId = userId };
                 this.votes.Add(vote);
                 this.votes.SaveChanges();
 

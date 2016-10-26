@@ -18,7 +18,7 @@
                 .Routing()
                 .ShouldMap(request => request
                     .WithLocation("/api/laptops")
-                    .WithMethod("Get"))
+                    .WithMethod("GET"))
                 .To<LaptopsController>(c => c.Get());
         }
 
@@ -29,7 +29,7 @@
                 .Routing()
                 .ShouldMap(request => request
                     .WithLocation("/api/laptops/1")
-                    .WithMethod("Get"))
+                    .WithMethod("GET"))
                 .To<LaptopsController>(c => c.Get(1));
         }
 
@@ -41,7 +41,7 @@
                 .ShouldMap(request => request
                     .WithLocation("/api/laptops/filter")
                     .WithQueryString("?term=term&order=order")
-                    .WithMethod("Get"))
+                    .WithMethod("GET"))
                 .To<LaptopsController>(c => c.Filter("term", "order"));
         }
 
@@ -53,7 +53,7 @@
                 .ShouldMap(request => request
                     .WithLocation("/api/laptops/all")
                     .WithQueryString("?page=2")
-                    .WithMethod("Get"))
+                    .WithMethod("GET"))
                 .To<LaptopsController>(c => c.All(2));
         }
     }
